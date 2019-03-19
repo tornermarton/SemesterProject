@@ -2,7 +2,7 @@
 title: DATASET
 tags: [Notebooks/SemesterProject]
 created: '2019-03-08T20:57:45.398Z'
-modified: '2019-03-12T14:25:53.399Z'
+modified: '2019-03-19T18:28:25.319Z'
 ---
 
 # DATASET
@@ -115,7 +115,7 @@ Arrives if subscription status is updated (subscribe/unsubscribe).
   "status": "subscribed",
   "pair": "XBT/USD",
   "subscription": {
-    "name": "book"
+    "name": "book",
     "depth": 100
   }
 }
@@ -178,12 +178,12 @@ The crawler uses separate buffer files for updates and snapshots for each asset_
 
 In a snapshot file each row is a snapshot.
 
-A - ask
-B - bid
-D - depth 
-P - price
-V - volume (quantity)
-TS - last modification timestamp
+A - ask  
+B - bid  
+D - depth   
+P - price  
+V - volume (quantity)  
+TS - last modification timestamp  
 
 E.g.: A_D1_P - depth1 ask price = best ask price, B_D100_V = worst bid volume
 
