@@ -7,6 +7,7 @@ import math
 from IPython.display import display
 
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 
 from sklearn.utils.multiclass import unique_labels
 from sklearn.metrics import confusion_matrix
@@ -60,6 +61,32 @@ def calc_VWAP_volatility(dataset):
 def calc_WAMP_volatility(dataset):
     return calc_volatility([calc_WAMP(i) for i in dataset[:, :600]])
 
+def make_labels(wamps, add_no_move=False, alpha=0.002, delay=100):
+    if delay < 1:
+        raise AttributeError()
+    
+    y = np.zeros(len(wamps)-delay)
+    
+    # Labels: -1 = DOWN  ; 0 = NO_MOVE ;  1 = UP
+    for i in range(len(wamps)-delay-1):
+        mean = np.mean(wamps[i+1:i+delay+1])
+        if add_no_move:
+            if mean - wamps[i] < -(wamps[i]*alpha):
+                y[i] = -1
+
+            elif mean - wamps[i] > wamps[i]*alpha:
+                y[i] = 1
+
+            else:
+                y[i] = 0
+        else:
+            if mean < wamps[i]:
+                y[i] = -1
+            else:
+                y[i] = 1
+                
+    return y
+
 def plot_LOB(lob_snapshot, depth):
     y_ask = lob_snapshot[1:depth*3:3]
     x_ask = lob_snapshot[:depth*3:3]
@@ -106,7 +133,6 @@ def plot_LOB(lob_snapshot, depth):
     ax2.tick_params(grid_alpha=0.5)
     ax2.legend(loc='upper center')
     
-    plt.figure(figsize=(16,9), dpi=100)
     plt.show()
 
 def plot_price_movement(dataset):
@@ -130,7 +156,25 @@ def plot_price_movement(dataset):
     ax.grid()
     ax.legend(loc='upper center')
     
-    plt.figure(figsize=(16,9), dpi=100)
+    plt.show()
+    
+def plot_labels(wamps, labels):
+    fig, ax = plt.subplots()
+
+    markers = ['ro' if label == -1 else 'go' if label == 1 else 'y.' for label in labels]
+
+    for i, wamp in enumerate(wamps):    
+        ax.plot(i, wamp, markers[i])
+        
+    ax.set_ylabel('Price')
+    ax.set_xlabel('Time')
+    ax.set_title('Daily price movement')
+    
+    ax.legend([Line2D([0], [0], marker='o', color='g', label='UP', markersize=15),
+               Line2D([0], [0], marker='.', color='y', label='NO_MOVE', markersize=15),
+               Line2D([0], [0], marker='o', color='r', label='DOWN', markersize=15),], 
+              ('UP', 'NO_MOVE', 'DOWN'))
+
     plt.show()
 
 def plot_confusion_matrix(y_true, y_pred, classes,
