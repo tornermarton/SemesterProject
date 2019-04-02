@@ -8,20 +8,23 @@ from sklearn.metrics import confusion_matrix
 
 from market_features import *
 
-def make_labels(wamps, add_no_move=False, alpha=0.002, delay=100):
+def make_labels(snapshots, add_no_move=False, alpha=1, delay=100):
     if delay < 1:
         raise AttributeError()
+        
+    spreads = [calc_spread(ss) for ss in snapshots]
+    wamps = [calc_WAMP(ss) for ss in snapshots]
     
     y = np.zeros(len(wamps)-delay)
     
     # Labels: -1 = DOWN  ; 0 = NO_MOVE ;  1 = UP
-    for i in range(len(wamps)-delay-1):
+    for i in range(len(wamps)-delay):
         mean = np.mean(wamps[i+1:i+delay+1])
         if add_no_move:
-            if mean - wamps[i] < -(wamps[i]*alpha):
+            if mean - wamps[i] < -(spreads[i]*alpha):
                 y[i] = -1
 
-            elif mean - wamps[i] > wamps[i]*alpha:
+            elif mean - wamps[i] > spreads[i]*alpha:
                 y[i] = 1
 
             else:
