@@ -1,6 +1,8 @@
 import numpy as np
 import math
 
+#https://www.quantstart.com/articles/high-frequency-trading-ii-limit-order-book
+
 def calc_spread(lob_snapshot):
     best_bid_price  = lob_snapshot[300]
     best_ask_price  = lob_snapshot[0]
@@ -13,6 +15,7 @@ def calc_mid_price(lob_snapshot):
     
     return (best_bid_price + best_ask_price) / 2
 
+# Weighted Average Mid-Price or Microprice
 def calc_WAMP(lob_snapshot):
     best_bid_price  = lob_snapshot[300]
     best_bid_volume = lob_snapshot[301]
@@ -20,22 +23,29 @@ def calc_WAMP(lob_snapshot):
     best_ask_price  = lob_snapshot[0]
     best_ask_volume = lob_snapshot[1]
     
-    wamp = (best_bid_price*best_bid_volume + best_ask_price*best_ask_volume) / (best_bid_volume+best_ask_volume)
+    wamp = (best_bid_volume*best_ask_price + best_ask_volume*best_bid_price) / (best_bid_volume+best_ask_volume)
     
     return wamp
 
 def calc_VWAP(lob_snapshot):
-    sum_price_x_volume = 0
-    sum_volume = 0
+    sum_price_x_volume_bid = 0
+    sum_price_x_volume_ask = 0
+    sum_volume_bid = 0
+    sum_volume_ask = 0
     
-    for i in range(0, len(lob_snapshot)-1, 3):
-        price = lob_snapshot[i]
-        volume = lob_snapshot[i+1]
+    size = len(lob_snapshot)
+    
+    for i,j in zip(range(0, int(size/2)-1, 3), range(int(size/2), size-1, 3)):
+        sum_price_x_volume_ask += lob_snapshot[i]*lob_snapshot[i+1]
+        sum_price_x_volume_bid += lob_snapshot[j]*lob_snapshot[j+1]
         
-        sum_price_x_volume += price*volume
-        sum_volume += volume
+        sum_volume_ask += lob_snapshot[i+1]
+        sum_volume_bid += lob_snapshot[j+1]
     
-    return sum_price_x_volume / sum_volume
+    VWAP_bid = sum_price_x_volume_bid / sum_volume_bid
+    VWAP_ask = sum_price_x_volume_ask / sum_volume_ask
+    
+    return (VWAP_bid*sum_volume_ask + VWAP_ask*sum_volume_bid) / (sum_volume_bid +sum_volume_ask)
 
 def calc_volatility(prices):
     mean = np.sum(prices) / len(prices)
