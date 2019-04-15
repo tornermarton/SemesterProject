@@ -4,37 +4,42 @@ import numpy as np
 from functions.market.features import calc_spread, calc_WAMP
 
 __all__ = [
+    "generate_binary_label",
+    "generate_trinary_label",
     "make_label",
     "make_labels",
+    "count_labels",
     "read_file_list"
 ]
 
 # Labels: UP = 1; NO_MOVE = 0; DOWN = -1
 
-def __generate_trinary_label(wamp, historical_wamp_mean, spread, alpha):
-    if historical_wamp_mean - wamp < -(spread*alpha):
+def generate_binary_label(wamp, future_wamp_mean):
+    if future_wamp_mean < wamp:
         return -1
-    elif historical_wamp_mean - wamp > spread*alpha:
+    else:
+        return 1
+
+def generate_trinary_label(wamp, future_wamp_mean, spread, alpha):
+    threshold = spread*alpha
+
+    if future_wamp_mean - wamp < -(threshold):
+        return -1
+    elif future_wamp_mean - wamp > threshold:
         return 1
     else:
         return 0
 
-def __generate_binary_label(wamp, historical_wamp_mean):
-    if historical_wamp_mean < wamp:
-        return -1
-    else:
-        return 1
-
-def make_label(snapshot, historical_snapshots, add_no_move=False, alpha=1):
+def make_label(snapshot, future_snapshots, add_no_move=False, alpha=1):
     spread = calc_spread(snapshot)
     wamp = calc_WAMP(snapshot)
 
-    mean = np.mean([calc_WAMP(ss) for ss in historical_snapshots])
+    mean = np.mean([calc_WAMP(ss) for ss in future_snapshots])
 
     if add_no_move:
-        return __generate_trinary_label(wamp, mean, spread, alpha)
+        return generate_trinary_label(wamp, mean, spread, alpha)
     else:
-        return __generate_binary_label(wamp, mean)
+        return generate_binary_label(wamp, mean)
 
 
 def make_labels(snapshots, add_no_move=False, alpha=1, delay=100):
@@ -45,9 +50,9 @@ def make_labels(snapshots, add_no_move=False, alpha=1, delay=100):
 
     for i in range(len(y)):
         snapshot = snapshots[i]
-        historical_snapshots = snapshots[i+1:i+delay+1]
+        future_snapshots = snapshots[i+1:i+delay+1]
 
-        y[i] = make_label(snapshot, historical_snapshots,  add_no_move, alpha)
+        y[i] = make_label(snapshot, future_snapshots,  add_no_move, alpha)
 
     return y
 

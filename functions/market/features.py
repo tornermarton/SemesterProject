@@ -13,22 +13,22 @@ __all__ = [
     "calc_VWAP_volatility"
 ]
 
-def calc_spread(lob_snapshot):
-    best_bid_price  = lob_snapshot[300]
+def calc_spread(lob_snapshot, lob_depth=100, lob_element_size=3):
+    best_bid_price  = lob_snapshot[lob_depth*lob_element_size]
     best_ask_price  = lob_snapshot[0]
     
     return best_ask_price - best_bid_price
 
-def calc_mid_price(lob_snapshot):
-    best_bid_price  = lob_snapshot[300]
+def calc_mid_price(lob_snapshot, lob_depth=100, lob_element_size=3):
+    best_bid_price  = lob_snapshot[lob_depth*lob_element_size]
     best_ask_price  = lob_snapshot[0]
     
     return (best_bid_price + best_ask_price) / 2
 
 # Weighted Average Mid-Price or Microprice
-def calc_WAMP(lob_snapshot):
-    best_bid_price  = lob_snapshot[300]
-    best_bid_volume = lob_snapshot[301]
+def calc_WAMP(lob_snapshot, lob_depth=100, lob_element_size=3):
+    best_bid_price  = lob_snapshot[lob_depth*lob_element_size]
+    best_bid_volume = lob_snapshot[lob_depth*lob_element_size+1]
     
     best_ask_price  = lob_snapshot[0]
     best_ask_volume = lob_snapshot[1]
