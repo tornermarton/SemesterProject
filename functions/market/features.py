@@ -3,6 +3,16 @@ import math
 
 #https://www.quantstart.com/articles/high-frequency-trading-ii-limit-order-book
 
+__all__ = [
+    "calc_spread",
+    "calc_mid_price",
+    "calc_WAMP",
+    "calc_VWAP",
+    "calc_volatility",
+    "calc_WAMP_volatility",
+    "calc_VWAP_volatility"
+]
+
 def calc_spread(lob_snapshot):
     best_bid_price  = lob_snapshot[300]
     best_ask_price  = lob_snapshot[0]
