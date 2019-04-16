@@ -12,23 +12,25 @@ __all__ = [
     "read_file_list"
 ]
 
-# Labels: UP = 1; NO_MOVE = 0; DOWN = -1
 
-def generate_binary_label(wamp, future_wamp_mean):
-    if future_wamp_mean < wamp:
+# Labels: UP = 1; NO_MOVE = 0; DOWN = -1
+def generate_binary_label(history_mean, future_mean):
+    if future_mean < history_mean:
         return -1
     else:
         return 1
 
-def generate_trinary_label(wamp, future_wamp_mean, spread, alpha):
-    threshold = spread*alpha
 
-    if future_wamp_mean - wamp < -(threshold):
+def generate_trinary_label(history_mean, future_mean, threshold_base, alpha):
+    threshold = threshold_base*alpha
+
+    if future_mean - history_mean < -threshold:
         return -1
-    elif future_wamp_mean - wamp > threshold:
+    elif future_mean - history_mean > threshold:
         return 1
     else:
         return 0
+
 
 def make_label(snapshot, future_snapshots, add_no_move=False, alpha=1):
     spread = calc_spread(snapshot)
@@ -56,6 +58,7 @@ def make_labels(snapshots, add_no_move=False, alpha=1, delay=100):
 
     return y
 
+
 def count_labels(dataset):
     up_cnt = 0
     down_cnt = 0
@@ -71,6 +74,7 @@ def count_labels(dataset):
     print("UP labels:", up_cnt, '\t', '{}%'.format(up_cnt/(up_cnt+nomove_cnt+down_cnt)*100))
     print("NO_MOVE labels:", nomove_cnt, '\t', '{}%'.format(nomove_cnt/(up_cnt+nomove_cnt+down_cnt)*100))
     print("DOWN labels:", down_cnt, '\t', '{}%'.format(down_cnt/(up_cnt+nomove_cnt+down_cnt)*100))
+
 
 def read_file_list(data_root_dir, verbose=False):
     updates_file_list = []
