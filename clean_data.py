@@ -4,12 +4,13 @@ import time, os
 import numpy as np
 import pandas as pd
 
-from functions import *
+from functions.preprocessing import *
 
 
 def create_dir(path):
     if not os.path.exists(path):
         os.mkdirs(path)
+
 
 def clean_dataset(dataset, start_time):
     clean = np.zeros([len(dataset), 4], dtype=float)
@@ -50,6 +51,7 @@ def clean_updates_files(data_root_dir, verbose=False):
         
         if verbose:
             print("File:", path, "cleaned.")
-        
+
+
 if __name__ == "__main__":
     clean_updates_files("data/kraken/", True)
