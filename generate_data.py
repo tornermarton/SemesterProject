@@ -74,7 +74,7 @@ def run(data_root_dir, lob_depth=100, alpha=1, window_size=100, binary_labels=Fa
                     history_mean = np.mean(dataset["wamp"][global_cnt - 2 * window_size + 1:global_cnt - window_size])
                     future_mean = np.mean(dataset["wamp"][global_cnt - window_size + 1:global_cnt + 1])
 
-                    spread = calc_volatility(dataset["wamp"][global_cnt - window_size + 1:global_cnt + 1])
+                    volatility = calc_volatility(dataset["wamp"][global_cnt - window_size + 1:global_cnt + 1])
 
                     if binary_labels:
                         dataset[global_cnt - window_size]["label"] = generate_binary_label(
@@ -85,7 +85,7 @@ def run(data_root_dir, lob_depth=100, alpha=1, window_size=100, binary_labels=Fa
                         dataset[global_cnt - window_size]["label"] = generate_trinary_label(
                             history_mean=history_mean,
                             future_mean=future_mean,
-                            threshold_base=spread,
+                            threshold_base=volatility,
                             alpha=alpha
                         )
 
@@ -150,8 +150,6 @@ if __name__ == "__main__":
                         )
 
     args = parser.parse_args()
-
-    print(args)
 
     run(data_root_dir=args.data_root_dir,
         lob_depth=args.depth,

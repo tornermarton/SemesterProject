@@ -63,11 +63,7 @@ def calc_VWAP(lob_snapshot):
 
 
 def calc_volatility(prices):
-    mean = np.sum(prices) / len(prices)
-
-    variance = np.sum([(i - mean) * (i - mean) for i in prices]) / len(prices)
-
-    return math.sqrt(variance)
+    return np.std(prices)
 
 
 def calc_VWAP_volatility(dataset):
