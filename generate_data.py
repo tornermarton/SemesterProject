@@ -32,13 +32,13 @@ def run(data_root_dir, lob_depth=100, alpha=1, window_size=100, binary_labels=Fa
         print(n_days, "days of data is going to be consumed from", n_asset_pairs, "asset-pairs.")
         print("UP,", "" if binary_labels else "NO_MOVE,", "DOWN labels are used at labelling.")
 
-    ss_shape = (2 * lob_depth, 3)
+    #ss_shape = (2 * lob_depth, 3)
 
     global_cnt = 0
 
     for i in range(n_asset_pairs):
         dataset = np.zeros([n_days * n_ss_per_file],
-                           dtype=[('snapshot', np.float32, ss_shape), ('rel_prices', np.float32, 2 * lob_depth),
+                           dtype=[('snapshot', np.float32, 2*lob_depth*3), ('rel_prices', np.float32, 2 * lob_depth),
                                   ('timestamp', np.float32, 1), ('wamp', np.float32, 1), ('label', int, 1)])
 
         asset_pair_name = snapshots_file_list[0].split("/")[-2]
@@ -57,7 +57,7 @@ def run(data_root_dir, lob_depth=100, alpha=1, window_size=100, binary_labels=Fa
             data = np.loadtxt(snapshots_file_list[i * n_days + j], delimiter=',')
 
             for j, ss in enumerate(data):
-                snapshot = ss[:-1].reshape(-1, 3)
+                snapshot = ss[:-1] #.reshape(-1, 3)
                 timestamp = ss[-1]
                 wamp = calc_VWAP(ss)
 

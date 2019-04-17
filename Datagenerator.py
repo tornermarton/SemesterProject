@@ -3,6 +3,7 @@ import numpy as np
 
 from multiprocessing import Pool
 import os
+from itertools import takewhile,repeat
 
 from market_features import *
 
@@ -11,10 +12,12 @@ class DataGenerator(keras.utils.Sequence):
     
     def __init__(self, data_root_dir, 
                  batch_size=64, 
-                 n_labels=2,
                  depth=100,
-                 alpha=0.1,
-                 delay=100,
+                 n_labels=2,
+                 label_alpha=0.1,
+                 label_window=100,
+                 time_window=50,
+                 stride=50,
                  type_="train",
                  validation_split=0.2,
                  test_split=0.1,
@@ -23,11 +26,16 @@ class DataGenerator(keras.utils.Sequence):
         """Initialize the generator"""
         
         self.data_root_dir = data_root_dir 
-        self.batch_size = batch_size 
-        self.n_labels = n_labels
+        self.batch_size = batch_size
         self.depth = depth
-        self.alpha = alpha
-        self.delay = delay
+        
+        self.n_labels = n_labels
+        self.label_alpha = alpha
+        self.label_window = label_window
+        
+        self.time_window = time_window
+        self.stride = stride
+        
         self.type_ = type_
         self.shuffle = True
         
@@ -41,6 +49,9 @@ class DataGenerator(keras.utils.Sequence):
     def __len__(self):
         """Number of batches per epoch"""
         return int(np.ceil(self.total_frame_count / self.batch_size))
+    
+    def __getitem__(self):
+        # TODO implement
     
     def __read_files_lists(self):
         n_asset_pairs = 0
@@ -66,8 +77,12 @@ class DataGenerator(keras.utils.Sequence):
         return n_asset_pairs, update_files_list, snapshot_files_list
     
     def count_samples(self, file_path):
-        loaded_data = np.loadtxt(file_path, delimiter=',')
-        return len(loaded_data)
+        f = open(filename, 'rb')
+        bufgen = takewhile(lambda x: x, (f.raw.read(1024*1024) for _ in repeat(None)))
+        return sum( buf.count(b'\n') for buf in bufgen )
+        
+        #loaded_data = np.loadtxt(file_path, delimiter=',')
+        #return len(loaded_data)
     
     def __build_statistics(self):
         n_asset_pairs, update_files_list, snapshot_files_list = self.__read_files_lists()
@@ -86,3 +101,6 @@ class DataGenerator(keras.utils.Sequence):
         stats["path"] = snapshot_files_list
         
         return n_asset_pairs, stats
+    
+    def __build_mapping(self):
+        return
