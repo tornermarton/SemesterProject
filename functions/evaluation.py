@@ -5,8 +5,11 @@ import matplotlib.pyplot as plt
 from sklearn.utils.multiclass import unique_labels
 from sklearn.metrics import confusion_matrix
 
+from sklearn import metrics
+
 __all__ = [
-    "plot_confusion_matrix"
+    "plot_confusion_matrix",
+    "evaluate_result"
 ]
 
 
@@ -63,3 +66,11 @@ def plot_confusion_matrix(y_true, y_pred, classes,
     fig.tight_layout()
     
     plt.show()
+    
+def evaluate_result(y_true, y_pred):
+    accuracy = metrics.accuracy_score(y_true, y_pred)
+    precision = metrics.precision_score(y_true, y_pred, average='weighted')
+    recall = metrics.recall_score(y_true, y_pred, average='weighted')
+    f1_score = metrics.f1_score(y_true, y_pred, average='weighted')
+    
+    return {"accuracy": accuracy, "precision": precision, "recall": recall, "f1_score": f1_score}
