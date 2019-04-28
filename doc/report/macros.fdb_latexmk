@@ -1,0 +1,10 @@
+# Fdb version 3
+["pdflatex"] 1556473880 "macros.tex" "macros.pdf" "macros" 1556473880
+  "/usr/local/texlive/2018/texmf-dist/web2c/texmf.cnf" 1522066949 33362 cf75436e19743e94a92a6b1b9183c434 ""
+  "/usr/local/texlive/2018/texmf-var/web2c/pdftex/pdflatex.fmt" 1556456766 4220280 cde6d3607f5b69656e4b82bd9ed30ee9 ""
+  "/usr/local/texlive/2018/texmf.cnf" 1523934483 577 0b39adfd7c93507ff20c9c14c2f1a33f ""
+  "macros.aux" 1556472872 8 a94a2480d3289e625eea47cd1b285758 ""
+  "macros.tex" 1556473875 2066 93f3439e6afc541382c97b43b6e64b87 ""
+  (generated)
+  "macros.log"
+  "macros.pdf"

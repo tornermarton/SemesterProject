@@ -1,0 +1,80 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ezt ne piszkáld!!!!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{myheadings} % legyen fejléc 
+
+\newcommand{\semesterprojecttitle}{
+  \begin{center}
+    \huge{\textbf{Semester project report}}
+    
+    \smallskip
+    \small{Department of Telecommunications and Media Informatics}
+  \end{center}
+  \bigskip
+} 
+
+% Argumentumok: #1=Név, #2=Neptunkód, #3=szakirány, #4=email, #5 konzulens-1, #6 konzulens-1-email, #7 konzulens-2, #8 konzulens-2-email
+\newcommand{\semesterprojectauthor}[6]{
+
+\begin{center}
+  \begin{tabular}{ l c }
+  Author:         & \textbf{#1}  \\
+  Neptun:         & \textbf{\texttt{#2}}  \\
+  Specialization: & \textbf{#3}  \\
+  E-mail address: & \href{mailto:#4}{\textbf{#4}}  \\
+  Supervisor:     & \textbf{#5}  \\
+  E-mail addres:  & \href{mailto:#6}{\textbf{#6}} \\
+  
+  \end{tabular}
+\end{center}
+\bigskip
+
+}
+
+% % Argumentumok: #1=Név, #2=email
+% \newcommand{\konzulens}[2]{
+%   \noindent\textbf{Konzulens:} #1 
+%   \newline\emph{Email cím:}\/ \href{mailto:#2}{#2}
+%   \newline
+% 
+% }
+
+% Argumentumok: #1=Tanév (xxxx/xx alakban, #2=félév (pont nélkül)
+\newcommand{\semester}[2]{
+  \large\textbf{#1 #2. semester}
+}
+
+% Argumentumok: #1=téma címe 
+\newcommand{\tasktitle}[1]{
+  \begin{center}
+    \LARGE\textbf{Title: #1}
+    \bigskip
+  \end{center}
+}
+
+% Argumentumok: #1=téma részletei 
+\newcommand{\taskdescription}[1]{
+\begin{center}
+  \Large\textbf{Task} 
+\end{center}
+#1
+\newline
+\bigskip
+}
+
+% A fejezetek közé beágyazott irod.jegyzék
+\def\references#1{\renewcommand{%
+\baselinestretch}{1}\list
+ {\small [\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+ \advance\leftmargin\labelsep
+ \usecounter{enumi}}
+ \def\newblock{\small \hskip .11em plus .33em minus .07em}
+ \sloppy\clubpenalty4000\widowpenalty4000
+ \sfcode`\.=1000\relax}
+\let\endreferences=\endlist%
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "template"
+%%% End: 

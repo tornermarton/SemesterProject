@@ -1,0 +1,556 @@
+%                                             -*- coding: utf-8 -*-
+% Mindenkinek csak javasolni tudjuk, hogy latex-et használjon.
+% Szakdolgozatnál vagy diplománál már egyértelműen kijönnek az
+% előnyei a Worddel szemben.  Ennek ellenére ez a sablon messze nem
+% tökéletes.  Ha valamit javítanál benne, kérlek, küld vissza, hogy
+% hallgatótársaid is profitáljanak belőle.  Köszönöm.
+
+% További nehézséget okoz, hogy a népszerű latex disztribúciók nem
+% tartalmazzák a legújabb változatát a magyar.ldf-nek.  A szükséges
+% fájlokat a sablon mellé bemásoltuk, de le is tölthetőek innen:
+% http://www.math.bme.hu/latex/
+%
+%
+%
+\documentclass[11pt,a4paper,oneside]{article}
+\usepackage[margin=3cm]{geometry}
+% =================================================================
+% Magyar nyelvi támogatás
+%------------------------
+% ###################
+% Nyelvváltó parancsok:
+%\selectlanguage{english}
+%\selectlanguage{magyar}
+% rövid angol beszúrás:  \foreignlanguage{english}{some english text}
+% határozott névelők generálása ``magyar'' babel-el:
+% argumentum+megfelelő határozott nevelő: \az{},\Az{}
+% csak a megfelelő határozott nevelő: \az*{}, \Az*{}
+% címkék: \aref{}, \aref*{}, képletekhez \aref()
+%        \Aref{}, \Aref*{}, képletekhez \Aref()
+% oldalak: \apageref{}, \apageref*{}
+%        \Apageref{}, \Apageref*{}
+% idézetek: \acite, \acite*, \Acite, \Acite*
+% ###################
+\usepackage[english]{babel} %vegyes nyelvi támogatás a
+% magyar helyesírás ellenőrzéshez (ispell) és elválasztáshoz
+\selectlanguage{english}
+
+%=================================================================
+% direkt ékezetes karakter beírás támogatás
+%-------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow} 
+%================================================================
+% Undorító dolog bitmappelt (Type III) betűtípust nézni a PDF-ben
+% képernyőn. Az alapértelmezett Computer Modern font LaTex-ben
+% bitmappelt, ezért használjunk Times fontot:
+\usepackage{times}
+
+%================================================================
+% ha ábrát akarunk beemelni, akkor használjuk a graphicx/graphics
+% csomagot és az \includegraphics[width=<width>]{abra.pdf} parancsot
+\usepackage{graphicx} %for graphics
+%kepek helye a gyokerhez(ehhez a file-hoz kepest) kepest
+\graphicspath{{./figs/}}
+
+%================================================================
+% Kötelezően használjuk a hyperref csomagot, mert ezzel többek között 
+%  kultúrált hyperlinkelt PDF-et lehet csinálni az alábbi
+%  variációkban, különféle hyperref backend-ekkel:
+%  pdflatex,dvipdfm,ps2pdf
+% tapsztalataim szerint a MikTeX (Win32) a 'dvipdfm' konverzióval
+% optimális  míg a teTeX (Linux/Solaris) jobb szereti a 'dvips' módszert
+%------------------------------------
+% pontosan egyet kommentezzünk be!!!!!!!
+% értelemszerűen backend függően generáljunk dvi-ból PDF-et!!!
+%------------------------------------
+% A hyperref csomag az utolsó beolvasott csomag legyen, kivéve néhány
+% problémás csomagot, pl. algorithm
+%-----------
+% ########################### FONTOS ###########################
+% A hyperref hibásan működik a babel csomag 'magyar.ldf' fájljának
+% 1.5-ös verziójánál korábbi változatával. 2004. februárjában a MikTeX
+% és teTex disztribúciók még csak a v.1.4 verziót tartalmazták! A fájl
+% aktuális verziója a BME Matematikai intézet LaTeX honlapjáról
+% elérhető: http://www.math.bme.hu/latex/ 
+% A lusták kedvéért a jelen sablon mellé is mellékelem:
+% magyarlatex_0.01-2.tar.gz 
+% ########################### FONTOS ###########################
+%-----------
+\PassOptionsToPackage{hyphens}{url}\usepackage[colorlinks=true]{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Itt kezdődik maga a dokumentum
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\input{macros} % Ez kell!!!
+\markright{Márton Torner (OZFKFP)} % egyoldalas fejléc!!!
+
+%--------------------------------------------------------------------
+% fedlap
+%--------------------------------------------------------------------
+\begin{titlepage}
+%bme logo 
+ \begin{figure}[h]
+    \centering
+      \includegraphics[width=12cm]{bme_logo}
+  \label{fig:bme_logo}
+  \end{figure}
+  \thispagestyle{empty}
+  %cím generálás
+  \semesterprojecttitle
+ 
+  %\author argumentumok: #1=Név, #2=Neptunkód, #3=szakirány, #4=email,#5 konzulens-1, #6 konzulens-1-email, #7 konzulens-2, #8 konzulens-2-email
+  \semesterprojectauthor{Márton Torner}{OZFKFP}{Infocommunication (HIT)}{torner.marton@gmail.com}{Bálint Gyires-Tóth, PhD}{toth.b@tmit.bme.hu}
+ 
+ 
+%\tasktitle argumentuma a task rövid, 1 soros címe
+  \tasktitle{Financial time series modeling and forecasting with deep neural networks} 
+
+  %\taskdescription argumentuma a task 1-2 bekezdésnyi ismertetése
+  \taskdescription{The student’s task is to collect limit order book data from a chosen crypto exchange, 
+  analyze and process the gathered records and to develop a neural network based solution to predict 
+  the direction of the price movement of the asset-pairs.
+  
+  In this work level 100 data (limit order book, depth: 100) is used from Kraken crypto exchange. The live order flow 
+  is queried with the help of the provided API and saved on a local storage. The aim is to create a Deep Learning 
+  powered system which can predict the price movement direction from the given history. The first approach is a linear 
+  regression based solution and after the successful tests I try to use a deep neural network as the model.
+  
+  In the future this work can be used as a base for creating a complex system for algorithmic trading.}
+ 
+
+  %\semester argumentumok:
+  % #1=Tanév (xxxx/xx alakban), #2=félév (pont nélkül!)
+  \begin{center}
+    \semester{2018/19}{II}
+  \end{center}
+  
+ 
+\end{titlepage} 
+
+%==================================================================
+\begin{center}
+  \section{Theory and previous works}
+  \label{sec:theory_prev}
+\end{center}
+% A munka  előzményei és kiindulási állapota
+% \newpage
+\subsection{Introduction}
+\label{sec:introduction}
+
+The computerization of financial markets and the availability of the electronic records of different stock exchanges 
+like transactions, order flow and limit order books provide us a great opportunity to analyze and model the dynamics of 
+these markets. Over the last years a huge number of studies have been done on this field which can serve as a good base 
+for further studies.
+
+With the computerization also came the rapid acceleration of the trading on these financial markets and big companies 
+started to use algorithmic solutions to steal a march on their rivals and gain some higher profits.
+
+The quick development that the field of Deep Learning had in the last decade and the impressive number of successful 
+researches conducted on the topic of time series forecasting opened the door to change the traditional mathematical 
+algorithms with a neural network based solutions. Price forecasting is just a step leading to more complex systems 
+which use the predictions as inputs to deliver a trading strategy with the help of machine learning 
+(reinforcement learning).
+
+These solutions could change the role of financial specialists in the future.
+
+\subsection{Theoretical summary}
+\label{sec:theoretical_summary}
+
+  \subsubsection{Price formation mechanism}
+  \label{sec:price_formation_mechanism}
+  
+  The market price per share of stock (“share price”) is the amount of money an investor is willing to pay to own 
+  a company's single stock. The ‘price formation mechanism’ - given in (\ref{eq:1}) - is a map which tries to represent 
+  the relation between market price and different variables affecting it, e.g. price history, order flow, news about 
+  the companies or the market etc.
+
+  \begin{equation}
+    Price(t+\Delta t) = F(Price history(0...t), Order Flow(0...t), Other Info) = F(X_{t}, \epsilon_{t})
+    \label{eq:1}
+  \end{equation}
+
+
+  \begin{center}
+    \begin{tabular}{l l}
+      $X_{t}$: & set of state variables (e.g. order flow, volatility, price, etc.) \\
+      $\epsilon_{t}$: & random noise (represents the arrival of new, unknown information) \\
+      $\Delta t$: & time resoution
+    \end{tabular}
+  \end{center}
+
+  \bigskip
+
+  It is shown that this relation is universal (not asset-specific) and stationary (stable across time, even at 
+  out-of-sample predictions) ~\cite{univ}. These two features give us the opportunity to use all collected data points 
+  to design and train a universal model which can make predictions for all asset-pairs valid even in the future.
+
+  \subsubsection{Limit Order Book}
+  \label{sec:limit_order_book}
+  
+  In this work limit order book data is used as the input so this section tries to provide a short overview what it is 
+  and how it works. On stock exchanges we want to buy shares or sell the ones we hold and to accomplish this we place 
+  orders of which the LOB consists. There are more special types of orders but in this work only limit orders are used. 
+  They remain in the LOB until being executed or cancelled.
+  
+  The LOB has two sides, the ask and the bid side, shown in (\ref{fig:1}). The ask side represents the sell orders 
+  (willing to sell the given amount at the given price) and the bid side the buy orders (willing to buy the given amount 
+  at the given price).
+
+  \begin{figure}[tbh]
+    \centering
+    \includegraphics[width=\textwidth]{lob_snapshot.png}
+    \caption{Limit Order Book snapshot (ETH\_EUR). Bottom: Volume at each price level. Top: Cumulative volume at price levels.}
+    \label{fig:1}
+  \end{figure}
+
+  A tick is the measure of the minimum upward or downward movement in a price of a security this means the price levels 
+  in the LOB must be the multiples of this value (so order prices can not differ less than this). The best ask price is 
+  the lowest sell order and the best bid price is the highest buy order. These are the prices at which the given number 
+  of shares can be bought or sold. The difference between best ask and bid price is called the spread and their average 
+  is the mid-price. The weighted average mid-price (WAMP) and volume weighted average price (VWAP) can be calculated as 
+  shown in (\ref{eq:2}) and (\ref{eq:3}). The depth of the book is used in this paper as the number of best orders on 
+  each side (so depth=100 means the top 100 lowest priced ask- and the top 100 highest priced bid orders).
+
+  \begin{equation}
+    WAMP = \frac{p_{best}^{bid} * v_{best}^{ask} + p_{best}^{ask} * v_{best}^{bid}}{v_{best}^{bid} + v_{best}^{ask}}
+    \label{eq:2}
+  \end{equation}
+
+  \begin{equation}
+    VWAP = \frac{(\sum_{i=1}^{depth} (p_i^b * v_i^b))*v^a + (\sum_{i=1}^{depth} (p_i^a * v_i^a))*v^b}{v^a + v^b}
+    \label{eq:3}
+  \end{equation}
+
+  \begin{center}
+    \begin{tabular}{l l}
+      $p$: & price \\
+      $v$: & volume (without lower index = sum over side) \\
+      $b$: & bid \\
+      $a$: & ask
+    \end{tabular}
+  \end{center}
+
+  Orders are submitted and cancelled continuously which means that the updates arrive in a very high frequency 
+  (millisecond) and it is also easy to see that consuming the order flow of stock exchanges leads to Terabytes of data. 
+  At crypto exchanges order manipulation is a big problem to be faced at filtering the collected data. So, to process a 
+  live order book we have to deal with various problems [TODO link ide a crawler szekcióhoz].
+
+  \subsubsection{Deep Learning}
+  \label{sec:deep_learning}
+
+  Deep Learning models are deep neural networks (an example can be seen on (\ref{fig:2})) trained on large datasets to 
+  uncover complex non-linear relations between the (high-dimensional) inputs and outputs. This can be simplified as it 
+  represents a functional relation like y = f(x) where y is the output and x is a (high-dimensional) input vector.
+
+  \begin{figure}[tbh]
+    \centering
+    \includegraphics[width=8cm]{mlp.png}
+    \caption{Simple multilayer perceptron.}
+    \label{fig:2}
+  \end{figure}
+
+  The network iterates the input data through its hidden layer(s) (basically weighted sums are calculated followed by 
+  so called ‘activation’ functions). In supervised approaches the weights are modified in the backpropagation process 
+  in which a regularized cost function – reflecting the discrepancy between the inputs and the desired output – is tried 
+  to be optimized. Depending on the input and output dimensionality and the design of the network it can have millions 
+  of parameters which makes these calculations computationally expensive. This problem made the development of this 
+  field a standstill until the rapid spread and improvement of GPUs started providing a huge advancement in 
+  calculations.
+
+  \subsubsection{Convolutional Networks}
+  \label{sec:conv_nets}
+
+  A class of deep neural networks are convolutional neural networks (CNN). The main design is the same as any other 
+  networks (input, hidden layers, output). General CNNs use a set of convolutional layers followed by fully-connected 
+  layers (all neurons in a layer are connected to every neuron in the preceding and following layers (\ref{fig:2})) as 
+  hidden layers. Convolutional layers are used for representing small or high features in the data with applying a 
+  convolutional operation to their input. It uses filters which are parts of the data with the same or less dimension 
+  than the input. Using $k$ filters $k$ feature maps are generated.
+  
+  Attention is a mechanism which can be added to reach better results with the cost of more computational expenses 
+  ~\cite{attention}. At a high-level attention can be described as giving the network the ability to learn which parts 
+  are more important to focus on. It is commonly and successfully used at natural language processing tasks.
+
+  \subsubsection{Generative Adversarial Networks}
+  \label{sec:gans}
+
+  Generative adversarial networks (GAN) are deep neural architectures comprised of a generator and a discriminator 
+  network (\ref{fig:3}) introduced by Goodfellow et al. ~\cite{gan}. These two networks contest against each other in 
+  the following way. The aim of the generator is to produce data indistinguishable of the real data and the 
+  discriminator tries to classify whether its input was real data or fake, generated by the opposing network. The losses 
+  of the networks are propagated back combined making both networks’ reward depending on both of their performance. This 
+  means if the generator lacks competence the discriminator’s work will be easy thus the system will be incompatible of 
+  solving the problem. The design and training of GANs is a complex task.
+
+  \begin{figure}[tbh]
+    \centering
+    \includegraphics[width=12cm]{gan.jpg}
+    \caption{GAN architecture example.}
+    \label{fig:3}
+  \end{figure}
+
+\subsection{Starting point, previous works on this project}
+\label{sec:prev_works}
+
+At the start of the project I was no preceding work given and did not make any research on this topic before.
+
+I started learning the theory of Deep Learning as part of the university course VITMAV45 and gained a well based 
+knowledge on the subject to start with.
+
+\newpage
+%==================================================================
+\section{Az elvégzett munka és az eredmények ismertetése}
+\label{sec:az-elvegzett-munka}
+
+
+\subsection{A munkám ismertetése logikus fejezetekre tagoltan}
+\label{sec:a-munkam-ismert}
+<Én magam (nem a társam) a félév során következőket olvastam el /
+programoztam / készítettem el / teszteltem / dokumentáltam / néztem át
+/ tanultam meg, stb.  Tételes leírása és felsorolása mindannak, ami a
+félév során történt, alátámasztandó azon állításom a
+konzulens/tárgyfelelős felé, hogy összességében mindent beleértve
+tényleg dolgoztam a TVSZ szerint kreditenként 30 órát, azaz a heti 2
+kontakt órás tárgy esetében min. $2,5*30 = 75$ munkaórát, illetve a
+heti 6 kontakt órás tárgy esetében min. $8*30 = 240$ munkaórát\dots>
+
+Ebben a részben a hallgató az általa elvégzett munkát mutatja
+be. Hangsúlyosan a saját munka bemutatása a cél, hiszen a hallgató
+ezzel igazolja a témavezető és a tárgyfelelős irányába, hogy --
+folyamatosan fejlődve és egyre több és jobb munkát végezve -- a
+szakdolgozatát/diplomadolgozatát képes lesz megírni.  A beszámoló nem
+munkanapló, nem arra vagyunk kíváncsiak, hogy mit mikor csinált a
+hallgató és mennyi időt töltött vele, hanem egy eredmény-centrikus
+beszámolót szeretnénk olvasni.  De itt is fontos tudni, hogy
+megosztott task esetén ki-mit csinált, mekkora részt vállalt.
+
+Az egész beszámoló elkészítésénél törekedni kell a magyar nyelv
+szabályainak követésére és a műszaki dokumentáció/tudományos közlemény
+írásával kapcsolatosan kialakult közmegegyezés szerinti formai
+követelmények betartására.  (Tehát nem kell többes számként hivatkozni
+saját magunkra, kerülni kell a furcsa megfogalmazást, passzív és egyéb
+kifacsart mondatszerkezeteket.  Az egy szót határozatlan névelőként
+történő használatakor ne írjuk ki számként.)
+
+
+A beszámoló természetesen nem csak szöveget tartalmazhat, hanem
+képleteket, táblázatokat, ábrákat és még sok minden mást.  Ezek
+kapcsán az alábbi elvek irányadók:
+\begin{itemize}
+\item Az ábráknak, képeknek és táblázatoknak mindig van számuk és
+  címük. (A cím nem ennyi: ,,1. ábra'', hanem azt írd le, ami látható
+  rajta.)
+
+\item Az ábrákra, a képekre és a táblázatokra a szövegben hivatkozni
+  kell, és a szövegben elemezni kell azokat. Például
+
+\item Az ábrák, képek és táblázatok mérete a szükségesnek megfelelő
+  legyen: elég nagy ahhoz, hogy kinyomtatva is olvasható és
+  értelmezhető legyen, de nem nagyobb annál, mint amit szerepe
+  indokol.
+
+\item A grafikonoknak a tengelyeken legyenek feliratai és ha releváns,
+  a mértékegység is.
+
+\item A képletek esetében nem minden képletre történik hivatkozás, de
+  ahol igen, ott a képletet a műszaki irodalomban jellemző módon a sor
+  végére tett kerek zárójelben lévő számmal jelöljük meg.  A
+  képleteket ne képként illeszd be a szövegbe.
+
+\item Kódrészleteket, ha nem relevánsak, ne illeszd be képként, főleg
+  ne rossz minőségben. Nyugodtan teheted függelékbe és hivatkozd be a
+  szövegben, mint a képeket, például: Az 1.~számú függelékben
+  található az adatbeolvasó kód, melyet C++ nyelven készítettem el.
+\end{itemize}
+
+Az írásbeli beszámolót a témavezető és a tárgyfelelős is értékeli. A
+tárgyfelelősi értékelés szempontjai az alábbiak:
+\begin{enumerate}
+\item Megfelel-e az elvégzett munka a félév elején kiadott tasknak?
+\item Megfele-e a beszámoló a formai követelményeknek? Ezen belül:
+  \begin{itemize}
+  \item a. Megfelelő-e az elméleti bevezető és az irodalomjegyzék?
+  \item b. Egyértelmű-e, hogy mi volt a hallgató saját munkája?
+  \item c. Megfelelő-e a dokumentum technikai színvonala?
+  \end{itemize}
+
+\end{enumerate}
+Ezen kívül a tárgyfelelős veszi figyelembe az értékelés során
+kialakult félévi jegyre vonatkoztatva az ún. ,,hanyagsági faktor''
+értékét, amelyet (\ref{eq:2}) szerint állapítunk meg:
+
+
+\begin{figure}[tbh]
+  \centering
+  \includegraphics[]{fig1.eps}
+  \caption{Hallgatók érdemjegyeinek eloszlása az írásbeli beszámoló késése függvényében}
+  \label{fig:fig2}
+\end{figure}
+
+Az (\ref{eq:1})-ben szereplő a szám a munkaterv beadásában történt
+késedelemre, míg a b szám az írásbeli beszámoló beadásában történt
+késedelemre vonatkozik.  Utóbbi értékeiről
+
+\begin{table}
+  \centering
+    \begin{tabular}{|l|c|}
+      \hline
+      Az írásbeli beszámoló beadásának napja     & A ,,b'' faktor értéke \\
+      a szóbeli beszámolóhoz képest (munkanapban) & ~ \\ \hline          
+      -4.~munkanap & $0.04$ \\ \hline 
+      -3.~munkanap & $0.09$ \\ \hline 
+      -2.~munkanap & $0.20$ \\ \hline 
+      -1.~munkanap & $0.30$ \\ \hline
+      \end{tabular}
+    \caption{Az írásbeli beszámoló késedelmes beadásával kapcsolatos hanyagsági faktor értéke}
+  \label{tab:hanyagsagi}
+\end{table}
+
+A beszámoló értékeléséről részletesebben írunk \cite{web}-ban.
+
+A beszámolóban bizonyára szerepelni fognak rövidítések. Ezeket a
+rövidítéseket, betűszavakat néhány, az infokommunikáció területén
+nagyon ismert és gyakran használt kifejezéstől (például IP, TCP, GPRS,
+UMTS) eltekintve ki kell fejteni logikusan az első használat
+alkalmával (például így: ,,A GPS (Generalized Processor Sharing) egy
+ideális folyadékmodellen alapuló csomagütemező eljárás.'').
+
+A beszámoló készítése során előfordulhat, hogy a hallgató úgy érzi,
+hogy alfejezetekkel tagolva jobban olvasható és érthető lenne a
+beszámoló.  Ennek akadálya nincs, de érdemes arra figyelni, hogy a
+túlzott tagolás sem tesz jót egy írásműnek, illetve hogy a címsorokban
+a rövidítések és a hivatkozások használata tilos.  Tartalomjegyzéket
+készíteni nem szükséges a beszámolóhoz, de nem is tilos, kivéve azt az
+esete, amikor nyilvánvalóan terjedelemnövelési célokat szolgál.
+
+A beszámoló terjedelme tárgyanként változhat.  Általános szabály, hogy
+1 hüvelyknél nagyobb margókat ne használjunk.  A szöveg legyen
+egyszeres sortávú, sorkizárt és 12 pontos betűméretű.  A bekezdések
+kezdődjenek behúzással a minta szerint.
+
+\subsection{Összefoglalás}
+\label{sec:osszefoglalas}
+
+A félévi munka során elért új eredmények ismételt, vázlatos, tömör
+Ebben a részben az adott félévre vonatkozó, az \emph{Önálló
+  laboratórium tárgy keretében elvégzett munka során} elért
+\textbf{új} eredmények ismételt, vázlatos, \textbf{tömör}
+összefoglalását várjuk, lehetőleg nem felsorolásként.  Itt még egyszer
+ki lehet térni a leglényegesebb eredményekre, valamint a félév során
+felmerülő nehézségekre, de meg lehet említeni a továbbfejlesztési
+irányokat, lehetőségeket is.
+
+Ezt a részt tagolható a következő pontok megválaszolásával:
+\begin{itemize}
+\item Mi volt az \textbf{aktuális kérdés}, probléma, amivel a félév
+  során foglalkoztál?
+\item Mi a dolgozat \textbf{célja}, miért érdekes egyáltalán ezzel a
+  problémával foglalkozni?
+\item Milyen \textbf{módszereket} használtál a probléma megoldása
+  érdekében?
+\item Mik a legfontosabb \textbf{eredmények}?
+\item Milyen \textbf{következtetéseket} lehet levonni?
+
+\end{itemize}
+
+Ha valaki elolvassa ezt a részt, képet kell kapnia az egész
+dolgozatról.  Ne legyen az absztrakt szó szerinti ismétlése.
+
+Fontos, hogy az itt megadott sablontól el lehet térni, használata nem
+kötelező, csak segítséget jelenthet, viszont a fedőlap lehetőleg
+maradjon ugyanez és tartalmilag egyezzen meg a sablon irányelveivel. A
+beszámoló felépítésében nem érdemes eltérni a \emph{Bevezető --
+  Féléves munka és eredmények bemutatása -- Összefoglaló} hármastól.
+
+\newpage
+ 
+%==================================================================
+\section{References}
+\label{sec:irod-es-csatl}
+
+\begin{references}{9}
+\label{sec:tanulm-irod-jegyz}
+
+\bibitem{univ} Justin Sirignano and Rama Cont (2018). \emph{
+\href{https://arxiv.org/abs/1803.06917.pdf}{Universal features of price formation in financial markets: perspectives from Deep Learning}}
+
+\bibitem{attention} \url{https://medium.com/syncedreview/a-brief-overview-of-attention-mechanism-13c578ba9129}
+
+\bibitem{gan} Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, Yoshua Bengio (2014). \emph{
+\href{http://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf}{Generative Adversarial Nets}}
+
+\bibitem{eco} Umberto Eco, \emph{Hogyan írjunk szakdolgozatot?},
+  Kairosz Kiadó, 2000, ISBN: 9639137537.
+
+\bibitem{esterhazy} Esterházy Péter, \emph{Termelési-regény (Kisssregény),}
+  Magvető Könyvkiadó, 2004, ISBN: 9631423948.
+
+\bibitem{web} \emph{Tájékoztató a Műszaki Informatika Szak önálló
+    laboratórium tantárgyainak 2008/9. tanév I. félévi lezárásáról a
+    BME TMIT-en (VITMA367, VITMA380, VITT4353, VITT4330),}
+  \url{http://inflab.tmit.bme.hu/08o/lezar.shtml}, szerk.: Németh Felicián,
+  2008. november 5.
+
+\bibitem{wikipedia} Wikipedia contributors, \emph{Wikipedia:Academic
+    use}, Wikipedia, The Free Encyclopedia, 2011 Nov 11.  Available
+  from: \\ \url{http://en.wikipedia.org/w/index.php?title=Wikipedia:Academic\_use\&oldid=460041928}
+
+\end{references}
+
+Itt jegyezném meg, hogy a tanulmányozott irodalmat hivatkozni kell a
+szövegben.  Szükség esetén többször is.  Az irodalomjegyzék célja
+(lásd fejezetet) ugyanis
+kettős\footnote{Akárcsak ennek a fejezet hivatkozásnak, ami a
+  \texttt{$\backslash$aref babel} parancsot demonstrálja}:
+\begin{enumerate}
+\item Az olvasó tájékoztatása, hogy a dokumentumban ki nem fejtett
+  dolgoknak, a tudottnak vélt ismereteknek hol lehet bővebben
+  utánanézni, így ott kell meghivatkozni az irodalmat~\cite{eco,
+    esterhazy}, ahová az irodalom kapcsolódik.
+\item Megmutatni a tárgyfelelosnek/konzulesnek az elolvasott irodalom
+  mennyiségét
+\end{enumerate}
+
+Javasoljuk, hogy a hallgatók tanulmányozzák, hogyan néznek ki a
+hivatkozások a villamosmérnöki/informatikai szakma vezető szakmai
+folyóirataiban megjelenő cikkekben.  Ebben a témavezető is biztosan
+tud segíteni.  A hivatkozás teljességére és egyértelműségére tessék
+ügyelni.  Például, ha egy könyvnek több, eltérő kiadása is van, akkor
+azt is meg kell jelölni, hogy melyik kiadásra hivatkozunk.  A webes
+hivatkozások problémásak szoktak lenni, de manapság egyre több az
+olyan dokumentum, ami csak weben lelhető fel, ezért használatuk nem
+zárható ki. Itt is törekedni kell azonban a pontosságra és a
+visszakereshetőségre. A weben található dokumentumoknak is van címe,
+szerzője, illetve érdemes megadni a letöltés/olvasás időpontját is,
+hiszen ezek a dokumentumok idővel megváltozhatnak.
+
+A wikipédiás hivatkozások használata nem javasolt, mert a wikipedia
+másodlagos forrás.  Tájékozodjuk a wikipédián, de aztán olvassuk el az
+adott oldalhoz megadott hivatkozásokat is.  A wikipedián külön szócikk
+foglalkozik azzal, hogy miért nem szerencsés tudományos munkákban a
+wikipédiára hivatkozni \cite{wikipedia}.
+
+Nem publikus dokumentumok hivatkozása nem javasolt és csak kivételes
+helyzetben elfogadható!
+
+%==================================================================
+\subsection{A csatlakozó dokumentumok jegyzéke}
+\label{sec:csat-irod}
+
+<A munka ezen beszámolóba be nem fért eredményeinek (például a forrás
+fájlok, mindenképpen csatolni akart forráskód részlet, felhasználói
+leírások, programozói leírások (API), stb.) megnevezése,
+fellelhetőségi helyének pontos definíciója, mely alapján a az
+erőforrás előkereshető -- értelemszerűen nem nyilvános dokumentumok
+hivatkozása nem elfogadható.>
+
+\end{document} 
+
+%%% Local Variables: 
+%%% mode: latex 
+%%% TeX-master: t 
+%%% End:
+
