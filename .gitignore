@@ -10,3 +10,15 @@ __pycache__/
 \.idea/
 
 test\.ipynb
+
+doc/report/report\.aux
+
+doc/report/report\.fdb_latexmk
+
+doc/report/report\.fls
+
+doc/report/report\.log
+
+doc/report/report\.out
+
+doc/report/report\.synctex\.gz
