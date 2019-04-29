@@ -112,17 +112,17 @@
   \tasktitle{Financial time series modeling and forecasting with deep neural networks} 
 
   %\taskdescription argumentuma a task 1-2 bekezdésnyi ismertetése
-  \taskdescription{The student’s task is to collect limit order book data from a chosen crypto exchange, 
+  \taskdescription{The task is to collect limit order book data from a chosen crypto exchange, 
   analyze and process the gathered records and to develop a neural network based solution to predict 
   the direction of the price movement of the asset-pairs.
   
   In this work level 100 data (limit order book, depth: 100) is used from Kraken crypto exchange. The live order flow 
   is queried with the help of the provided API and saved on a local storage. The aim is to create a Deep Learning 
-  powered system which can predict the price movement direction from the given history. The first approach is a linear 
-  regression based solution and after the successful tests I try to use a deep neural network as the model.
+  powered system which can predict the price movement direction from the given history. The first approaches are 
+  models based on autoregressive solutions (logistic regression and random forest regression) and then I try to use a 
+  deep neural network as the model.
   
   In the future this work can be used as a base for creating a complex system for algorithmic trading.}
- 
 
   %\semester argumentumok:
   % #1=Tanév (xxxx/xx alakban), #2=félév (pont nélkül!)
@@ -130,7 +130,6 @@
     \semester{2018/19}{II}
   \end{center}
   
- 
 \end{titlepage} 
 
 %==================================================================
@@ -306,7 +305,7 @@ knowledge on the subject to start with.
 \newpage
 %==================================================================
 \begin{center}
-  \section{Work on project}
+  \section{Own work on project}
   \label{sec:work}
 \end{center}
 
@@ -314,9 +313,9 @@ knowledge on the subject to start with.
 \label{sec:data}
 
 The project's first task was to find or collect a database to work with. On financial field the big and high frequency 
-raw datasets which are precise enough can cost a lot of money (3000 USD+). The was no funding available so I collected 
-my own raw data. It is from Kraken (\url{www.kraken.com}) which is a US based cryptocurrency exchange. Kraken gives the 
-opportunity to access live order book (and of course other) data through a websocket based API. 
+raw datasets which are precise enough can cost a lot of money (3000 USD+). There was no funding available so I collected 
+my own raw data from Kraken (\url{www.kraken.com}) which is a US based cryptocurrency exchange. Kraken gives the 
+opportunity to access live order book (and of course other) data through a REST- and a Websocket based API. 
 
 In the training and evaluation process only ETH\_EUR \footnote{Ethereum - Euro: Ethereum is an open-source, public, 
 blockchain-based distributed computing platform and operating system featuring smart contract (scripting) functionality. 
@@ -390,133 +389,11 @@ The dataset contains entries from 15th March 2019.
   \label{table:2}
 \end{table}
 
-\subsection{A munkám ismertetése logikus fejezetekre tagoltan}
-\label{sec:a-munkam-ismert}
-<Én magam (nem a társam) a félév során következőket olvastam el /
-programoztam / készítettem el / teszteltem / dokumentáltam / néztem át
-/ tanultam meg, stb.  Tételes leírása és felsorolása mindannak, ami a
-félév során történt, alátámasztandó azon állításom a
-konzulens/tárgyfelelős felé, hogy összességében mindent beleértve
-tényleg dolgoztam a TVSZ szerint kreditenként 30 órát, azaz a heti 2
-kontakt órás tárgy esetében min. $2,5*30 = 75$ munkaórát, illetve a
-heti 6 kontakt órás tárgy esetében min. $8*30 = 240$ munkaórát\dots>
-
-Ebben a részben a hallgató az általa elvégzett munkát mutatja
-be. Hangsúlyosan a saját munka bemutatása a cél, hiszen a hallgató
-ezzel igazolja a témavezető és a tárgyfelelős irányába, hogy --
-folyamatosan fejlődve és egyre több és jobb munkát végezve -- a
-szakdolgozatát/diplomadolgozatát képes lesz megírni.  A beszámoló nem
-munkanapló, nem arra vagyunk kíváncsiak, hogy mit mikor csinált a
-hallgató és mennyi időt töltött vele, hanem egy eredmény-centrikus
-beszámolót szeretnénk olvasni.  De itt is fontos tudni, hogy
-megosztott task esetén ki-mit csinált, mekkora részt vállalt.
-
-Az egész beszámoló elkészítésénél törekedni kell a magyar nyelv
-szabályainak követésére és a műszaki dokumentáció/tudományos közlemény
-írásával kapcsolatosan kialakult közmegegyezés szerinti formai
-követelmények betartására.  (Tehát nem kell többes számként hivatkozni
-saját magunkra, kerülni kell a furcsa megfogalmazást, passzív és egyéb
-kifacsart mondatszerkezeteket.  Az egy szót határozatlan névelőként
-történő használatakor ne írjuk ki számként.)
+  \subsubsection{Data preparation}
 
 
-A beszámoló természetesen nem csak szöveget tartalmazhat, hanem
-képleteket, táblázatokat, ábrákat és még sok minden mást.  Ezek
-kapcsán az alábbi elvek irányadók:
-\begin{itemize}
-\item Az ábráknak, képeknek és táblázatoknak mindig van számuk és
-  címük. (A cím nem ennyi: ,,1. ábra'', hanem azt írd le, ami látható
-  rajta.)
-
-\item Az ábrákra, a képekre és a táblázatokra a szövegben hivatkozni
-  kell, és a szövegben elemezni kell azokat. Például
-
-\item Az ábrák, képek és táblázatok mérete a szükségesnek megfelelő
-  legyen: elég nagy ahhoz, hogy kinyomtatva is olvasható és
-  értelmezhető legyen, de nem nagyobb annál, mint amit szerepe
-  indokol.
-
-\item A grafikonoknak a tengelyeken legyenek feliratai és ha releváns,
-  a mértékegység is.
-
-\item A képletek esetében nem minden képletre történik hivatkozás, de
-  ahol igen, ott a képletet a műszaki irodalomban jellemző módon a sor
-  végére tett kerek zárójelben lévő számmal jelöljük meg.  A
-  képleteket ne képként illeszd be a szövegbe.
-
-\item Kódrészleteket, ha nem relevánsak, ne illeszd be képként, főleg
-  ne rossz minőségben. Nyugodtan teheted függelékbe és hivatkozd be a
-  szövegben, mint a képeket, például: Az 1.~számú függelékben
-  található az adatbeolvasó kód, melyet C++ nyelven készítettem el.
-\end{itemize}
-
-Az írásbeli beszámolót a témavezető és a tárgyfelelős is értékeli. A
-tárgyfelelősi értékelés szempontjai az alábbiak:
-\begin{enumerate}
-\item Megfelel-e az elvégzett munka a félév elején kiadott tasknak?
-\item Megfele-e a beszámoló a formai követelményeknek? Ezen belül:
-  \begin{itemize}
-  \item a. Megfelelő-e az elméleti bevezető és az irodalomjegyzék?
-  \item b. Egyértelmű-e, hogy mi volt a hallgató saját munkája?
-  \item c. Megfelelő-e a dokumentum technikai színvonala?
-  \end{itemize}
-
-\end{enumerate}
-Ezen kívül a tárgyfelelős veszi figyelembe az értékelés során
-kialakult félévi jegyre vonatkoztatva az ún. ,,hanyagsági faktor''
-értékét, amelyet (\ref{eq:2}) szerint állapítunk meg:
-
-
-\begin{figure}[tbh]
-  \centering
-  \includegraphics[]{fig1.eps}
-  \caption{Hallgatók érdemjegyeinek eloszlása az írásbeli beszámoló késése függvényében}
-  \label{fig:fig2}
-\end{figure}
-
-Az (\ref{eq:1})-ben szereplő a szám a munkaterv beadásában történt
-késedelemre, míg a b szám az írásbeli beszámoló beadásában történt
-késedelemre vonatkozik.  Utóbbi értékeiről
-
-\begin{table}
-  \centering
-    \begin{tabular}{|l|c|}
-      \hline
-      Az írásbeli beszámoló beadásának napja     & A ,,b'' faktor értéke \\
-      a szóbeli beszámolóhoz képest (munkanapban) & ~ \\ \hline          
-      -4.~munkanap & $0.04$ \\ \hline 
-      -3.~munkanap & $0.09$ \\ \hline 
-      -2.~munkanap & $0.20$ \\ \hline 
-      -1.~munkanap & $0.30$ \\ \hline
-      \end{tabular}
-    \caption{Az írásbeli beszámoló késedelmes beadásával kapcsolatos hanyagsági faktor értéke}
-  \label{tab:hanyagsagi}
-\end{table}
-
-A beszámoló értékeléséről részletesebben írunk \cite{web}-ban.
-
-A beszámolóban bizonyára szerepelni fognak rövidítések. Ezeket a
-rövidítéseket, betűszavakat néhány, az infokommunikáció területén
-nagyon ismert és gyakran használt kifejezéstől (például IP, TCP, GPRS,
-UMTS) eltekintve ki kell fejteni logikusan az első használat
-alkalmával (például így: ,,A GPS (Generalized Processor Sharing) egy
-ideális folyadékmodellen alapuló csomagütemező eljárás.'').
-
-A beszámoló készítése során előfordulhat, hogy a hallgató úgy érzi,
-hogy alfejezetekkel tagolva jobban olvasható és érthető lenne a
-beszámoló.  Ennek akadálya nincs, de érdemes arra figyelni, hogy a
-túlzott tagolás sem tesz jót egy írásműnek, illetve hogy a címsorokban
-a rövidítések és a hivatkozások használata tilos.  Tartalomjegyzéket
-készíteni nem szükséges a beszámolóhoz, de nem is tilos, kivéve azt az
-esete, amikor nyilvánvalóan terjedelemnövelési célokat szolgál.
-
-A beszámoló terjedelme tárgyanként változhat.  Általános szabály, hogy
-1 hüvelyknél nagyobb margókat ne használjunk.  A szöveg legyen
-egyszeres sortávú, sorkizárt és 12 pontos betűméretű.  A bekezdések
-kezdődjenek behúzással a minta szerint.
-
-\subsection{Összefoglalás}
-\label{sec:osszefoglalas}
+\subsection{Summary}
+\label{sec:summary}
 
 A félévi munka során elért új eredmények ismételt, vázlatos, tömör
 Ebben a részben az adott félévre vonatkozó, az \emph{Önálló
@@ -550,7 +427,6 @@ beszámoló felépítésében nem érdemes eltérni a \emph{Bevezető --
   Féléves munka és eredmények bemutatása -- Összefoglaló} hármastól.
 
 \newpage
- 
 %==================================================================
 \section{References}
 \label{sec:irod-es-csatl}
@@ -561,75 +437,30 @@ beszámoló felépítésében nem érdemes eltérni a \emph{Bevezető --
 \bibitem{univ} Justin Sirignano and Rama Cont (2018). \emph{
 \href{https://arxiv.org/abs/1803.06917.pdf}{Universal features of price formation in financial markets: perspectives from Deep Learning}}
 
-\bibitem{attention} \url{https://medium.com/syncedreview/a-brief-overview-of-attention-mechanism-13c578ba9129}
+\bibitem{attention} \emph{\href{https://medium.com/syncedreview/a-brief-overview-of-attention-mechanism-13c578ba9129}{A Brief Overview of Attention Mechanism}}
 
 \bibitem{gan} Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, Yoshua Bengio (2014). \emph{
 \href{http://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf}{Generative Adversarial Nets}}
 
-\bibitem{eco} Umberto Eco, \emph{Hogyan írjunk szakdolgozatot?},
-  Kairosz Kiadó, 2000, ISBN: 9639137537.
+\bibitem{boris} \emph{\href{https://github.com/borisbanushev/stockpredictionai}{Using the latest advancements in AI to predict stock market movements}}
 
-\bibitem{esterhazy} Esterházy Péter, \emph{Termelési-regény (Kisssregény),}
-  Magvető Könyvkiadó, 2004, ISBN: 9631423948.
-
-\bibitem{web} \emph{Tájékoztató a Műszaki Informatika Szak önálló
-    laboratórium tantárgyainak 2008/9. tanév I. félévi lezárásáról a
-    BME TMIT-en (VITMA367, VITMA380, VITT4353, VITT4330),}
-  \url{http://inflab.tmit.bme.hu/08o/lezar.shtml}, szerk.: Németh Felicián,
-  2008. november 5.
-
-\bibitem{wikipedia} Wikipedia contributors, \emph{Wikipedia:Academic
-    use}, Wikipedia, The Free Encyclopedia, 2011 Nov 11.  Available
-  from: \\ \url{http://en.wikipedia.org/w/index.php?title=Wikipedia:Academic\_use\&oldid=460041928}
+\bibitem{deeplob} Zihao Zhang, Stefan Zohren, and Stephen Roberts (2019). \emph{
+\href{https://arxiv.org/abs/1803.06917.pdf}{DeepLOB: Deep Convolutional Neural Networks for Limit Order Books}}
 
 \end{references}
 
-Itt jegyezném meg, hogy a tanulmányozott irodalmat hivatkozni kell a
-szövegben.  Szükség esetén többször is.  Az irodalomjegyzék célja
-(lásd fejezetet) ugyanis
-kettős\footnote{Akárcsak ennek a fejezet hivatkozásnak, ami a
-  \texttt{$\backslash$aref babel} parancsot demonstrálja}:
-\begin{enumerate}
-\item Az olvasó tájékoztatása, hogy a dokumentumban ki nem fejtett
-  dolgoknak, a tudottnak vélt ismereteknek hol lehet bővebben
-  utánanézni, így ott kell meghivatkozni az irodalmat~\cite{eco,
-    esterhazy}, ahová az irodalom kapcsolódik.
-\item Megmutatni a tárgyfelelosnek/konzulesnek az elolvasott irodalom
-  mennyiségét
-\end{enumerate}
-
-Javasoljuk, hogy a hallgatók tanulmányozzák, hogyan néznek ki a
-hivatkozások a villamosmérnöki/informatikai szakma vezető szakmai
-folyóirataiban megjelenő cikkekben.  Ebben a témavezető is biztosan
-tud segíteni.  A hivatkozás teljességére és egyértelműségére tessék
-ügyelni.  Például, ha egy könyvnek több, eltérő kiadása is van, akkor
-azt is meg kell jelölni, hogy melyik kiadásra hivatkozunk.  A webes
-hivatkozások problémásak szoktak lenni, de manapság egyre több az
-olyan dokumentum, ami csak weben lelhető fel, ezért használatuk nem
-zárható ki. Itt is törekedni kell azonban a pontosságra és a
-visszakereshetőségre. A weben található dokumentumoknak is van címe,
-szerzője, illetve érdemes megadni a letöltés/olvasás időpontját is,
-hiszen ezek a dokumentumok idővel megváltozhatnak.
-
-A wikipédiás hivatkozások használata nem javasolt, mert a wikipedia
-másodlagos forrás.  Tájékozodjuk a wikipédián, de aztán olvassuk el az
-adott oldalhoz megadott hivatkozásokat is.  A wikipedián külön szócikk
-foglalkozik azzal, hogy miért nem szerencsés tudományos munkákban a
-wikipédiára hivatkozni \cite{wikipedia}.
-
-Nem publikus dokumentumok hivatkozása nem javasolt és csak kivételes
-helyzetben elfogadható!
-
 %==================================================================
-\subsection{A csatlakozó dokumentumok jegyzéke}
-\label{sec:csat-irod}
+\subsection{Source code}
+\label{sec:source_code}
 
-<A munka ezen beszámolóba be nem fért eredményeinek (például a forrás
-fájlok, mindenképpen csatolni akart forráskód részlet, felhasználói
-leírások, programozói leírások (API), stb.) megnevezése,
-fellelhetőségi helyének pontos definíciója, mely alapján a az
-erőforrás előkereshető -- értelemszerűen nem nyilvános dokumentumok
-hivatkozása nem elfogadható.>
+The whole project's source code (except the crawler's) can be found on GitHub: \\ 
+\url{https://github.com/tornermarton/SemesterProject} \\
+On some topics a deeper insight/longer explanation can be found in the Markdown files under the docs folder. \\
+Most of the images used here can be found in the Jupyter Notebooks which are publicated also in this repository. \\
+
+\vspace{5mm}
+\noindent{The following library served as a base for the crawler:} \\
+\url{https://github.com/krakenfx/kraken-wsclient-py} 
 
 \end{document} 
 
