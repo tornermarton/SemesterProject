@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1556484303 "report.tex" "report.pdf" "report" 1556484304
+["pdflatex"] 1556536101 "report.tex" "report.pdf" "report" 1556536101
   "/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc" 1480098666 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2018/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/local/texlive/2018/texmf-dist/fonts/tfm/adobe/courier/pcrb8r.tfm" 1480098688 1292 3059476c50a24578715759f22652f3d0 ""
@@ -98,11 +98,11 @@
   "figs/lob_snapshot.png" 1556478687 43253 0ed6c3e3fad288f2829b8b6ab18057c6 ""
   "figs/mlp.png" 1556482425 674370 b56be87d7d736599c81f21ecfa72807c ""
   "macros.tex" 1556479399 2004 d5ece6b18c67fb18ae28eccda88439e1 ""
-  "report.aux" 1556484304 5620 fe5dd9d97a4312d7247e1c2d53d743d0 ""
-  "report.out" 1556484304 1091 b152fbc3681e706494b768edc4a40e59 ""
-  "report.tex" 1556484287 27414 af616ace99ce6b8b2d812d2b6dc7ea39 ""
+  "report.aux" 1556536101 6065 d93422396afbc9744aa48a1126f8c9c2 ""
+  "report.out" 1556536101 1101 35df2b27728c435fd5f58def8d036c31 ""
+  "report.tex" 1556536099 30993 d755404a01d33f062da4ddd1ba5c1cd4 ""
   (generated)
-  "report.aux"
-  "report.log"
   "report.pdf"
+  "report.log"
+  "report.aux"
   "report.out"

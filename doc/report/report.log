@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.4.28)  28 APR 2019 22:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.4.28)  29 APR 2019 13:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -231,21 +231,21 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 (./report.aux)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 86.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 89.
  (/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
@@ -323,7 +323,7 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 147.
 )
-Package hyperref Info: Link coloring ON on input line 86.
+Package hyperref Info: Link coloring ON on input line 89.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -333,90 +333,94 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count110
 )
-LaTeX Info: Redefining \ref on input line 86.
-LaTeX Info: Redefining \pageref on input line 86.
-LaTeX Info: Redefining \nameref on input line 86.
+LaTeX Info: Redefining \ref on input line 89.
+LaTeX Info: Redefining \pageref on input line 89.
+LaTeX Info: Redefining \nameref on input line 89.
 
 (./report.out) (./report.out)
 \@outlinefile=\write3
 \openout3 = `report.out'.
 
  (./macros.tex)
-<./figs/bme_logo.pdf, id=60, 705.63625pt x 188.705pt>
+<./figs/bme_logo.pdf, id=64, 705.63625pt x 188.705pt>
 File: ./figs/bme_logo.pdf Graphic file (type pdf)
 <use ./figs/bme_logo.pdf>
-Package pdftex.def Info: ./figs/bme_logo.pdf  used on input line 97.
+Package pdftex.def Info: ./figs/bme_logo.pdf  used on input line 100.
 (pdftex.def)             Requested size: 341.43306pt x 91.30873pt.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 102.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 105.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 105.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 105.
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 105.
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 105.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 108.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 108.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 108.
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 108.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 108.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/pcr/b/n' tried instead on input line 105.
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 108.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 109.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 112.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 121.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 124.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 127.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 130.
  [1
 
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./figs/
 bme_logo.pdf>]
-<./figs/lob_snapshot.png, id=80, 966.61125pt x 552.0625pt>
+<./figs/lob_snapshot.png, id=84, 966.61125pt x 552.0625pt>
 File: ./figs/lob_snapshot.png Graphic file (type png)
 <use ./figs/lob_snapshot.png>
-Package pdftex.def Info: ./figs/lob_snapshot.png  used on input line 204.
+Package pdftex.def Info: ./figs/lob_snapshot.png  used on input line 207.
 (pdftex.def)             Requested size: 426.79135pt x 243.75063pt.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.216 
+l.219 
        [1] [2 <./figs/lob_snapshot.png>]
-<./figs/mlp.png, id=105, 1254.6875pt x 1060.96375pt>
+<./figs/mlp.png, id=109, 1254.6875pt x 1060.96375pt>
 File: ./figs/mlp.png Graphic file (type png)
 <use ./figs/mlp.png>
-Package pdftex.def Info: ./figs/mlp.png  used on input line 250.
+Package pdftex.def Info: ./figs/mlp.png  used on input line 253.
 (pdftex.def)             Requested size: 227.62204pt x 192.47081pt.
  [3 <./figs/mlp.png (PNG copy)>]
-<./figs/gan.jpg, id=118, 949.5475pt x 359.3425pt>
+<./figs/gan.jpg, id=122, 949.5475pt x 359.3425pt>
 File: ./figs/gan.jpg Graphic file (type jpg)
 <use ./figs/gan.jpg>
-Package pdftex.def Info: ./figs/gan.jpg  used on input line 290.
+Package pdftex.def Info: ./figs/gan.jpg  used on input line 293.
 (pdftex.def)             Requested size: 341.43306pt x 129.20967pt.
 
 [4 <./figs/gan.jpg>]
-Overfull \hbox (0.67026pt too wide) in paragraph at lines 320--329
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 323.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 323.
+ [5]
+Overfull \hbox (0.67026pt too wide) in paragraph at lines 404--413
 \T1/ptm/m/n/10.95 folyam-atosan fe-jl®dve és egyre több és jobb munkát végezve 
 -- a sza-k-dol-go-za-tát/diplomadolgozatát
  []
 
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 343.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 427.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 343.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 427.
 
-Overfull \hbox (2.37917pt too wide) in paragraph at lines 363--367
+Overfull \hbox (2.37917pt too wide) in paragraph at lines 447--451
 \T1/ptm/m/n/10.95 god-tan teheted függelékbe és hi-vatkozd be a szöveg-ben, min
 t a képeket, például: Az 1. számú
  []
 
-[5]
 Package epstopdf Info: Source file: <./figs/fig1.eps>
 (epstopdf)                    date: 2011-11-07 11:41:02
 (epstopdf)                    size: 330775 bytes
@@ -425,67 +429,63 @@ Package epstopdf Info: Source file: <./figs/fig1.eps>
 (epstopdf)                    size: 8676 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figs/fig1-eps-converted-
 to.pdf ./figs/fig1.eps>
-(epstopdf)             \includegraphics on input line 388.
+(epstopdf)             \includegraphics on input line 472.
 Package epstopdf Info: Output file is already uptodate.
-<./figs/fig1-eps-converted-to.pdf, id=130, 232.87pt x 244.915pt>
+<./figs/fig1-eps-converted-to.pdf, id=142, 232.87pt x 244.915pt>
 File: ./figs/fig1-eps-converted-to.pdf Graphic file (type pdf)
 <use ./figs/fig1-eps-converted-to.pdf>
-Package pdftex.def Info: ./figs/fig1-eps-converted-to.pdf  used on input line 3
-88.
+Package pdftex.def Info: ./figs/fig1-eps-converted-to.pdf  used on input line 4
+72.
 (pdftex.def)             Requested size: 232.86942pt x 244.91438pt.
-
-Overfull \hbox (1.80296pt too wide) in paragraph at lines 421--428
+[6]
+Overfull \hbox (1.80296pt too wide) in paragraph at lines 505--512
 []\T1/ptm/m/n/10.95 A beszá-moló készítése során el®-for-dul-hat, hogy a hall-g
 ató úgy érzi, hogy alfe-jezetekkel tagolva
  []
 
-[6 <./figs/fig1-eps-converted-to.pdf>]
-Overfull \hbox (10.73306pt too wide) in paragraph at lines 437--445
+
+Overfull \hbox (10.73306pt too wide) in paragraph at lines 521--529
 \T1/ptm/m/n/10.95 egyszer ki lehet térni a leglényege-sebb ered-ményekre, valam
 int a félév során felmerül® ne-hézségekre,
  []
 
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 480--481
+[7 <./figs/fig1-eps-converted-to.pdf>] [8]
+Underfull \hbox (badness 10000) in paragraph at lines 564--565
 [][][]$\T1/pcr/m/n/10.95 https : / / medium . com / syncedreview / a -[] brief 
 -[] overview -[] of -[]
  []
 
 
-Underfull \hbox (badness 2126) in paragraph at lines 488--490
+Underfull \hbox (badness 2126) in paragraph at lines 572--574
 []\T1/ptm/m/n/10.95 Esterházy Péter, \T1/ptm/m/it/10.95 Termelési-regény (Kisss
 -regény), \T1/ptm/m/n/10.95 Magvet® Könyvki-adó, 2004, ISBN:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 497--500
+Underfull \hbox (badness 10000) in paragraph at lines 581--584
 [][]$\T1/pcr/m/n/10.95 http : / / en . wikipedia . org / w / index . php ? titl
 e = Wikipedia : Academic _
  []
 
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 507.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 507.
-[8]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 550.
- [9]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 550.
+[9]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 634.
+ [10]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 634.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 550.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 550.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 634.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 634.
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: B152FBC3681E706494B768EDC4A40E59;1091.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 550.
+(rerunfilecheck)             Checksum: 35DF2B27728C435FD5F58DEF8D036C31;1101.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 634.
  ) 
 Here is how much of TeX's memory you used:
- 6474 strings out of 492649
- 94714 string characters out of 6129622
- 198896 words of memory out of 5000000
- 10216 multiletter control sequences out of 15000+600000
- 49759 words of font info for 61 fonts, out of 8000000 for 9000
+ 6485 strings out of 492649
+ 94810 string characters out of 6129622
+ 200013 words of memory out of 5000000
+ 10221 multiletter control sequences out of 15000+600000
+ 52607 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 28i,9n,32p,307b,367s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 28i,9n,32p,307b,371s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
@@ -499,10 +499,10 @@ st/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts
 /type1/urw/times/utmb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw
 /times/utmr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utm
 r8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (10 pages, 1104461 bytes).
+Output written on report.pdf (11 pages, 1108153 bytes).
 PDF statistics:
- 234 PDF objects out of 1000 (max. 8388607)
- 198 compressed objects within 2 object streams
- 44 named destinations out of 1000 (max. 500000)
- 138 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 252 PDF objects out of 1000 (max. 8388607)
+ 214 compressed objects within 3 object streams
+ 49 named destinations out of 1000 (max. 500000)
+ 146 words of extra memory for PDF output out of 10000 (max. 10000000)
 

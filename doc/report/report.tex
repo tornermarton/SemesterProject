@@ -79,6 +79,9 @@
 % ########################### FONTOS ###########################
 %-----------
 \PassOptionsToPackage{hyphens}{url}\usepackage[colorlinks=true]{hyperref}
+\def\equationautorefname~#1\null{Equation (#1)\null}
+\def\figureautorefname~#1\null{Figure (#1)\null}
+\def\tableautorefname~#1\null{Table (#1)\null}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Itt kezdődik maga a dokumentum
@@ -163,9 +166,9 @@ These solutions could change the role of financial specialists in the future.
   \label{sec:price_formation_mechanism}
   
   The market price per share of stock (“share price”) is the amount of money an investor is willing to pay to own 
-  a company's single stock. The ‘price formation mechanism’ - given in (\ref{eq:1}) - is a map which tries to represent 
-  the relation between market price and different variables affecting it, e.g. price history, order flow, news about 
-  the companies or the market etc.
+  a company's single stock. The ‘price formation mechanism’ - given in \autoref{eq:1} - is a map which tries to 
+  represent the relation between market price and different variables affecting it, e.g. price history, order flow, 
+  news about the companies or the market etc.
 
   \begin{equation}
     Price(t+\Delta t) = F(Price history(0...t), Order Flow(0...t), Other Info) = F(X_{t}, \epsilon_{t})
@@ -195,7 +198,7 @@ These solutions could change the role of financial specialists in the future.
   orders of which the LOB consists. There are more special types of orders but in this work only limit orders are used. 
   They remain in the LOB until being executed or cancelled.
   
-  The LOB has two sides, the ask and the bid side, shown in (\ref{fig:1}). The ask side represents the sell orders 
+  The LOB has two sides, the ask and the bid side, shown on \autoref{fig:1}. The ask side represents the sell orders 
   (willing to sell the given amount at the given price) and the bid side the buy orders (willing to buy the given amount 
   at the given price).
 
@@ -211,8 +214,8 @@ These solutions could change the role of financial specialists in the future.
   the lowest sell order and the best bid price is the highest buy order. These are the prices at which the given number 
   of shares can be bought or sold. The difference between best ask and bid price is called the spread and their average 
   is the mid-price. The weighted average mid-price (WAMP) and volume weighted average price (VWAP) can be calculated as 
-  shown in (\ref{eq:2}) and (\ref{eq:3}). The depth of the book is used in this paper as the number of best orders on 
-  each side (so depth=100 means the top 100 lowest priced ask- and the top 100 highest priced bid orders).
+  given in \autoref{eq:2} and \autoref{eq:3}. The depth of the book is used in this paper as the number of best orders 
+  on each side (so depth=100 means the top 100 lowest priced ask- and the top 100 highest priced bid orders).
 
   \begin{equation}
     WAMP = \frac{p_{best}^{bid} * v_{best}^{ask} + p_{best}^{ask} * v_{best}^{bid}}{v_{best}^{bid} + v_{best}^{ask}}
@@ -241,7 +244,7 @@ These solutions could change the role of financial specialists in the future.
   \subsubsection{Deep Learning}
   \label{sec:deep_learning}
 
-  Deep Learning models are deep neural networks (an example can be seen on (\ref{fig:2})) trained on large datasets to 
+  Deep Learning models are deep neural networks (an example can be seen on \autoref{fig:2}) trained on large datasets to 
   uncover complex non-linear relations between the (high-dimensional) inputs and outputs. This can be simplified as it 
   represents a functional relation like y = f(x) where y is the output and x is a (high-dimensional) input vector.
 
@@ -265,10 +268,10 @@ These solutions could change the role of financial specialists in the future.
 
   A class of deep neural networks are convolutional neural networks (CNN). The main design is the same as any other 
   networks (input, hidden layers, output). General CNNs use a set of convolutional layers followed by fully-connected 
-  layers (all neurons in a layer are connected to every neuron in the preceding and following layers (\ref{fig:2})) as 
-  hidden layers. Convolutional layers are used for representing small or high features in the data with applying a 
-  convolutional operation to their input. It uses filters which are parts of the data with the same or less dimension 
-  than the input. Using $k$ filters $k$ feature maps are generated.
+  layers (all neurons in a layer are connected to every neuron in the preceding and following layers as seen on 
+  \autoref{fig:2}) as hidden layers. Convolutional layers are used for representing small or high features in the data 
+  with applying a convolutional operation to their input. It uses filters which are parts of the data with the same or 
+  less dimension than the input. Using $k$ filters $k$ feature maps are generated.
   
   Attention is a mechanism which can be added to reach better results with the cost of more computational expenses 
   ~\cite{attention}. At a high-level attention can be described as giving the network the ability to learn which parts 
@@ -278,8 +281,8 @@ These solutions could change the role of financial specialists in the future.
   \label{sec:gans}
 
   Generative adversarial networks (GAN) are deep neural architectures comprised of a generator and a discriminator 
-  network (\ref{fig:3}) introduced by Goodfellow et al. ~\cite{gan}. These two networks contest against each other in 
-  the following way. The aim of the generator is to produce data indistinguishable of the real data and the 
+  network (\autoref{fig:3}), introduced by Goodfellow et al. ~\cite{gan}. These two networks contest against each other 
+  in the following way. The aim of the generator is to produce data indistinguishable of the real data and the 
   discriminator tries to classify whether its input was real data or fake, generated by the opposing network. The losses 
   of the networks are propagated back combined making both networks’ reward depending on both of their performance. This 
   means if the generator lacks competence the discriminator’s work will be easy thus the system will be incompatible of 
@@ -302,9 +305,90 @@ knowledge on the subject to start with.
 
 \newpage
 %==================================================================
-\section{Az elvégzett munka és az eredmények ismertetése}
-\label{sec:az-elvegzett-munka}
+\begin{center}
+  \section{Work on project}
+  \label{sec:work}
+\end{center}
 
+\subsection{Data}
+\label{sec:data}
+
+The project's first task was to find or collect a database to work with. On financial field the big and high frequency 
+raw datasets which are precise enough can cost a lot of money (3000 USD+). The was no funding available so I collected 
+my own raw data. It is from Kraken (\url{www.kraken.com}) which is a US based cryptocurrency exchange. Kraken gives the 
+opportunity to access live order book (and of course other) data through a websocket based API. 
+
+In the training and evaluation process only ETH\_EUR \footnote{Ethereum - Euro: Ethereum is an open-source, public, 
+blockchain-based distributed computing platform and operating system featuring smart contract (scripting) functionality. 
+- \textit{Wikipedia} } snapshots are used but for further research on universality and stationarity ~\cite{univ} I save 
+25 asset-pair's data in aggregate. For each 1 snapshot is querried every minute through REST API calls and the 
+real-time order flow is recorded through the previosly mentioned Websocket API. 
+
+The saved data is stored in CSV file format, \autoref{table:1} and \autoref{table:2} show the structure. Every 
+asset-pair is saved to a separate folder and at the end of each day all buffer files (updates and snapshots) are 
+compressed and saved into a separate file this way saving space and ensuring that the unexpected corruption of a file 
+causes minimal data loss. The saving method also makes paralell datapreparation on multiple CPUs possible. 
+The dataset contains entries from 15th March 2019.
+
+\begin{table}[tbh]
+  \centering
+  \begin{tabular}{|l|l|}
+    \hline
+    Field              & Description \\
+    \hline
+    L1 Ask Price       & The price of the ask order at 1st level (best ask) \\
+    \hline
+    L1 Ask Volume      & The volume of the ask order at 1st level \\
+    \hline
+    L1 Ask Timestamp   & The last modification time of the ask order at 1st level \\
+    \hline
+    ... \\
+    \hline
+    L100 Ask Price     & The price of the ask order at 100th level \\
+    \hline
+    L100 Ask Volume    & The volume of the ask order at 100th level \\
+    \hline
+    L100 Ask Timestamp & The last modification time of the ask order at 100th level \\
+    \hline
+    L1 Bid Price       & The price of the bid order at 1st level (best bid) \\
+    \hline
+    L1 Bid Volume      & The volume of the bid order at 1st level \\
+    \hline
+    L1 Bid Timestamp   & The last modification time of the bid order at 1st level \\
+    \hline
+    ... \\
+    \hline
+    L100 Bid Price     & The price of the bid order at 100th level \\
+    \hline
+    L100 Bid Volume    & The volume of the bid order at 100th level \\
+    \hline
+    L100 Bid Timestamp & The last modification time of the bid order at 100th level \\
+    \hline
+    Timestamp          & The timestamp of the snapshot \\
+    \hline
+  \end{tabular}
+  \caption{One snapshot (one row in snapshot files).}
+  \label{table:1}
+\end{table}
+
+\begin{table}[tbh]
+  \centering
+  \begin{tabular}{|l|l|}
+    \hline
+    Field       & Description \\
+    \hline
+    AskOrBid    & The update type: 0 = ask, 1 = bid \\
+    \hline
+    Price       & The price of the order \\
+    \hline
+    Volume      & The volume of the order (0 means that the level is deleted)\\
+    \hline
+    Timestamp   & The last modification time \\
+    \hline
+  \end{tabular}
+  \caption{One update (one row in update files).}
+  \label{table:2}
+\end{table}
 
 \subsection{A munkám ismertetése logikus fejezetekre tagoltan}
 \label{sec:a-munkam-ismert}
