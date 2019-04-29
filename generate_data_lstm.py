@@ -21,7 +21,6 @@ def process_asset_pair(file_paths: list,
                        binary_labels: bool = False,
                        use_wamp: bool = False,
                        verbosity: int = 0) -> None:
-
     """Process raw data from a single asset_pair. The result is a single file which contains all
     snapshots and the labels for each. """
 
@@ -128,11 +127,24 @@ def process_asset_pair(file_paths: list,
     #     dataset["snapshot"][i + scaling_window, :, 1] = \
     #     volume_scaler.transform([dataset["snapshot"][i + scaling_window, :, 1]])[0]
     #
-    # if verbosity >= 2:
-    #     print("Scaling done.")
+
+    day = 1440
+
+    r = range(0, len(dataset["snapshot"]) - scaling_window - day, day)
+
+    scalers = [StandardScaler().fit(dataset["snapshot"][i:i + scaling_window].reshape(-1, 3)) for i in r]
+
+    for cnt, i in enumerate(r):
+        dataset["snapshot"][i + scaling_window:i + scaling_window + day] = \
+            scalers[cnt].transform(
+                dataset["snapshot"][i + scaling_window:i + scaling_window + day].reshape(-1, 3)).reshape(-1, 2 * lob_depth, 3)
+
+    if verbosity >= 2:
+        print("Scaling done.")
 
     # Trim unscaled data
-    dataset = dataset[scaling_window:]
+    #dataset = dataset[scaling_window:]
+    dataset = dataset[scaling_window:(len(dataset) // day) * day]
 
     # gzip and save file
     with gzip.GzipFile(filepath, "wb") as file:
@@ -144,7 +156,7 @@ def process_asset_pair(file_paths: list,
     return
 
 
-def run(data_root_dir:str,
+def run(data_root_dir: str,
         lob_depth: int,
         alpha: float,
         label_window: int,
@@ -152,7 +164,6 @@ def run(data_root_dir:str,
         binary_labels: bool = False,
         use_wamp: bool = False,
         verbosity: int = 0) -> None:
-
     """Do dataset generation process for each asset_pair"""
 
     n_asset_pairs = len(next(os.walk(data_root_dir))[1])
@@ -173,7 +184,7 @@ def run(data_root_dir:str,
         print("UP,", "" if binary_labels else "NO_MOVE,", "DOWN labels are used at labelling.")
 
     for i in range(n_asset_pairs):
-        process_asset_pair(file_paths=snapshots_file_list[i*n_days:i*n_days+n_days],
+        process_asset_pair(file_paths=snapshots_file_list[i * n_days:i * n_days + n_days],
                            lob_depth=lob_depth,
                            alpha=alpha,
                            label_window=label_window,
@@ -222,7 +233,7 @@ if __name__ == "__main__":
     parser.add_argument("-s", "--scaling_window",
                         metavar="WINDOW_SIZE",
                         help="Size of the sliding window at standard scaling.",
-                        default=300,
+                        default=3*1440,
                         type=int
                         )
 
