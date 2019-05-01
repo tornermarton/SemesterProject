@@ -401,6 +401,7 @@ multiple CPUs possible. The dataset contains entries from 15th March 2019.
 \end{table}
 
   \subsubsection{Data preparation}
+  \label{dataprep}
 
   I wrote a parameterizable python script to do the whole preprocessing. The following section explains the steps 
   executed by the generator.
@@ -413,6 +414,9 @@ multiple CPUs possible. The dataset contains entries from 15th March 2019.
   saved snapshots and create a full dataset which is saved to a single gzipped file. One parameter is which depth to 
   use and it is important to emphasize that this is the first operation as we calculate every metrics for the following 
   steps from the snapshots.
+
+  \subsubsection{Labels}
+  \label{labels}
 
   For each snapshot the WAMP (\ref{eq:wamp}) or the VWAP (\ref{eq:vwap}) is calculated since these are used in further 
   steps. After this, we create the labels previously mentioned in \ref{sec:limit_order_book}. The research aims to 
@@ -448,8 +452,30 @@ multiple CPUs possible. The dataset contains entries from 15th March 2019.
     \label{fig:4}
   \end{figure}
 
+  \subsubsection{Scaling}
+  \label{scaling}
 
-  After doing the labelling, the next step is to rescale the input (the snapshots as first approach)
+  After the labelling, the next step is to rescale the input (the snapshots as first approach). This is inevitable since 
+  there are multiple reasons for it. One is that if we use multiple asset-pairs the numbers can be on different scales 
+  e.g. the prices of Bitcoin and Ripple have a huge variance, this means we have to process them separately. The first 
+  approach was to use the z-score standardization method. As financial time series have regime shifts a static 
+  standardization would be inappropriate for a high frequency database over a considerable period of time, hence the 
+  previous 3 day's mean and standard deviation was used to standardize the actual day's prices. As for the volumes my 
+  first try was to simply normalize them, but a few tries showed that using the cumulative volumes at price levels 
+  boosts performance. This is reasonable, as humans can also see more information from the cumulative volume chart than 
+  from the normal diagram (\ref{fig:1}). This approach also partly solved the problem of the outliers which means that 
+  some volumes were on an other scale than the othes in the same snapshot and they grew even bigger during the scaling 
+  because they were too rare to effect the standard deviation which stayed a small number this way and enlarged the huge 
+  numbers (as they were divided by them).
+
+  For the recurrent neural networks a last task was to resample the dataset with the number of parameters as timestep to 
+  create small series as inputs.
+
+\subsection{Baseline predictions}
+\label{baseline_preds}
+
+In my work I used three methods as a starting-point to see how a simple algorythm can solve this complex task and to 
+have some results to which I can compare my future models.
 
 \subsection{Summary}
 \label{sec:summary}
