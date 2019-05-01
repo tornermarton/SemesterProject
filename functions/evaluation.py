@@ -13,10 +13,13 @@ __all__ = [
 ]
 
 
-def plot_confusion_matrix(y_true, y_pred, classes,
+def plot_confusion_matrix(y_true, y_pred,
                           normalize=False,
                           title=None,
-                          cmap=plt.cm.Blues):
+                          cmap=plt.cm.Blues,
+                          show_fig=True,
+                          save_fig=False,
+                          filename=""):
     """
     This function prints and plots the confusion matrix.
     Normalization can be applied by setting `normalize=True`.
@@ -30,14 +33,9 @@ def plot_confusion_matrix(y_true, y_pred, classes,
     # Compute confusion matrix
     cm = confusion_matrix(y_true, y_pred)
     # Only use the labels that appear in the data
-    # classes = classes[unique_labels(y_true, y_pred)]
+    classes = unique_labels(y_true)
     if normalize:
         cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-        print("Normalized confusion matrix")
-    else:
-        print('Confusion matrix, without normalization')
-
-    #print(cm)
 
     fig, ax = plt.subplots()
     im = ax.imshow(cm, interpolation='nearest', cmap=cmap)
@@ -64,9 +62,14 @@ def plot_confusion_matrix(y_true, y_pred, classes,
                     ha="center", va="center",
                     color="white" if cm[i, j] > thresh else "black")
     fig.tight_layout()
-    
-    plt.show()
-    
+
+    if save_fig:
+        plt.savefig(filename, dpi="figure", bbox_inches="tight")
+
+    if show_fig:
+        plt.show()
+
+
 def evaluate_result(y_true, y_pred):
     accuracy = metrics.accuracy_score(y_true, y_pred)
     precision = metrics.precision_score(y_true, y_pred, average='weighted')

@@ -97,3 +97,15 @@ def read_file_list(data_root_dir, verbose=False):
         print(len(updates_file_list), "snapshot files read.")
 
     return updates_file_list, snapshots_file_list
+
+
+def resample_timesteps(data, n_timesteps):
+    lob_depth = int(len(data["snapshot"][0]) / 2)
+
+    input_shape = (n_timesteps, 2 * lob_depth * 2)
+
+    dataset = np.zeros([len(data) - n_timesteps], dtype=[('input', np.float32, input_shape), ('label', int, 1)])
+
+    for i in range(0, len(dataset)):
+        dataset["label"][i] = data["label"][i + n_timesteps - 1]
+        dataset["input"][i] = data["snapshot"][i:i + n_timesteps, :, 0:2].reshape(-1, 2 * lob_depth * 2)
