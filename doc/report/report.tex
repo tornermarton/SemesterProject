@@ -165,13 +165,13 @@ These solutions could change the role of financial specialists in the future.
   \label{sec:price_formation_mechanism}
   
   The market price per share of stock (“share price”) is the amount of money an investor is willing to pay to own 
-  a company's single stock. The ‘price formation mechanism’ - given in \autoref{eq:1} - is a map which tries to 
+  a company's single stock. The ‘price formation mechanism’ - given in \autoref{eq:price_form} - is a map which tries to 
   represent the relation between market price and different variables affecting it, e.g. price history, order flow, 
   news about the companies or the market etc.
 
   \begin{equation}
     Price(t+\Delta t) = F(Price history(0...t), Order Flow(0...t), Other Info) = F(X_{t}, \epsilon_{t})
-    \label{eq:1}
+    \label{eq:price_form}
   \end{equation}
 
 
@@ -212,18 +212,24 @@ These solutions could change the role of financial specialists in the future.
   in the LOB must be the multiples of this value (so order prices can not differ less than this). The best ask price is 
   the lowest sell order and the best bid price is the highest buy order. These are the prices at which the given number 
   of shares can be bought or sold. The difference between best ask and bid price is called the spread and their average 
-  is the mid-price. The weighted average mid-price (WAMP) and volume weighted average price (VWAP) can be calculated as 
-  given in \autoref{eq:2} and \autoref{eq:3}. The depth of the book is used in this paper as the number of best orders 
-  on each side (so depth=100 means the top 100 lowest priced ask- and the top 100 highest priced bid orders).
+  is the mid-price (\ref{eq:mid-price}). The weighted average mid-price (WAMP) and volume weighted average price (VWAP) 
+  can be calculated as given in \autoref{eq:wamp} and \autoref{eq:vwap}. The depth of the book is used in this paper as 
+  the number of best orders on each side (so depth=100 means the top 100 lowest priced ask- and the top 100 highest 
+  priced bid orders).
+
+  \begin{equation}
+    Mid\-price = \frac{p_{best}^{bid} + p_{best}^{ask}}{2}
+    \label{eq:mid-price}
+  \end{equation}
 
   \begin{equation}
     WAMP = \frac{p_{best}^{bid} * v_{best}^{ask} + p_{best}^{ask} * v_{best}^{bid}}{v_{best}^{bid} + v_{best}^{ask}}
-    \label{eq:2}
+    \label{eq:wamp}
   \end{equation}
 
   \begin{equation}
     VWAP = \frac{(\sum_{i=1}^{depth} (p_i^b * v_i^b))*v^a + (\sum_{i=1}^{depth} (p_i^a * v_i^a))*v^b}{v^a + v^b}
-    \label{eq:3}
+    \label{eq:vwap}
   \end{equation}
 
   \begin{center}
@@ -276,6 +282,11 @@ These solutions could change the role of financial specialists in the future.
   ~\cite{attention}. At a high-level attention can be described as giving the network the ability to learn which parts 
   are more important to focus on. It is commonly and successfully used at natural language processing tasks.
 
+  \subsubsection{Long Short-Term Memory}
+  \label{sec:lstm}
+
+  TODO
+
   \subsubsection{Generative Adversarial Networks}
   \label{sec:gans}
 
@@ -317,17 +328,17 @@ raw datasets which are precise enough can cost a lot of money (3000 USD+). There
 my own raw data from Kraken (\url{www.kraken.com}) which is a US based cryptocurrency exchange. Kraken gives the 
 opportunity to access live order book (and of course other) data through a REST- and a Websocket based API. 
 
-In the training and evaluation process only ETH\_EUR \footnote{Ethereum - Euro: Ethereum is an open-source, public, 
+In the training and evaluation process only ETH-EUR \footnote{Ethereum - Euro: Ethereum is an open-source, public, 
 blockchain-based distributed computing platform and operating system featuring smart contract (scripting) functionality. 
-- \textit{Wikipedia} } snapshots are used but for further research on universality and stationarity ~\cite{univ} I save 
-25 asset-pair's data in aggregate. For each 1 snapshot is querried every minute through REST API calls and the 
-real-time order flow is recorded through the previosly mentioned Websocket API. 
+- \textit{Wikipedia} } snapshots are used but for further research on universality and stationarity ~\cite{univ}. I save 
+25 asset-pair's data in aggregate. For each currency 1 snapshot is querried every minute through REST API calls and the 
+real-time order flow is recorded through the previosly mentioned Websocket API.  
 
 The saved data is stored in CSV file format, \autoref{table:1} and \autoref{table:2} show the structure. Every 
 asset-pair is saved to a separate folder and at the end of each day all buffer files (updates and snapshots) are 
-compressed and saved into a separate file this way saving space and ensuring that the unexpected corruption of a file 
-causes minimal data loss. The saving method also makes paralell datapreparation on multiple CPUs possible. 
-The dataset contains entries from 15th March 2019.
+compressed (I chose gzip compression) and saved into a separate file this way saving space and ensuring that the 
+unexpected corruption of a file causes minimal data loss. The saving method also makes paralell datapreparation on 
+multiple CPUs possible. The dataset contains entries from 15th March 2019.
 
 \begin{table}[tbh]
   \centering
@@ -391,6 +402,54 @@ The dataset contains entries from 15th March 2019.
 
   \subsubsection{Data preparation}
 
+  I wrote a parameterizable python script to do the whole preprocessing. The following section explains the steps 
+  executed by the generator.
+
+  To train my models I chose to use 30 days of ETH-EUR limit order book history. The first step of the preprocessing is 
+  to clean and reorder the update records to put them into an ascending flow. This is required because the Websocket API 
+  not always sends the packets in the right order or a short loss of the network connection can also cause some 
+  problems. At visualizing the data I also noticed that the API sometimes forwards updates with timestamps from few days 
+  ago. Although I could not explain this behaviour I had to remove these entries. The next task was to process the 
+  saved snapshots and create a full dataset which is saved to a single gzipped file. One parameter is which depth to 
+  use and it is important to emphasize that this is the first operation as we calculate every metrics for the following 
+  steps from the snapshots.
+
+  For each snapshot the WAMP (\ref{eq:wamp}) or the VWAP (\ref{eq:vwap}) is calculated since these are used in further 
+  steps. After this, we create the labels previously mentioned in \ref{sec:limit_order_book}. The research aims to 
+  successfully predict the direction of the price movement using 3 categories: UP (1), DOWN (-1), NO\_MOVE (0). 
+  Snapshots are labelled using the following technique, based on the method introduced in the work by Zihao Zhang et al. 
+  (~\cite{deeplob}). Although trades aren't executed exactly at the WAMP or the VWAP, they are a good estimation since 
+  they contain more information than the mid-price with also taking the volumes at the price levels in consideration. 
+  As financial time series, especially high frequency limit order book metrics are highly stochastic, the comparison 
+  between $WAMP_t$ and $WAMP_{t+1}$ would result noisy labels which are unable to compress bigger trends (here where the
+  updates can happen on the scale of miliseconds this doesn't mean whole days, only minutes). I used a smoothing method 
+  which I recall briefly in \autoref{eq:m_minus} and \autoref{eq:m_plus}. The first is the mean of the previous k - 
+  including the present one - (history), the second is the following k number of WAMPs (future). So k is the prediction 
+  horizon.
+
+  \begin{equation}
+    m\_(t) = \frac{1}{k}\sum_{i=1}^{k}
+    \label{eq:m_minus}
+  \end{equation}
+
+  \begin{equation}
+    m_+(t) = \frac{1}{k}\sum_{i=1}^{k}
+    \label{eq:m_plus}
+  \end{equation}
+
+  The labels are decided based on a threshold which is calculated as multplying the volatility - calculated on the full 
+  time period (history + future) - by $\alpha$, a hyperparameter. An example can be seen on \autoref{fig:4}. Red color 
+  indicates the down, green the up and white the stationary labels.
+
+  \begin{figure}[tbh]
+    \centering
+    \includegraphics[width=10cm]{labels.png}
+    \caption{An example of labelling where the smoothing labels are used.}
+    \label{fig:4}
+  \end{figure}
+
+
+  After doing the labelling, the next step is to rescale the input (the snapshots as first approach)
 
 \subsection{Summary}
 \label{sec:summary}
