@@ -26,7 +26,8 @@ class TestEnvironment:
     def set_model(self, model):
         self.__model = model
 
-    def evaluate(self, X_test, y_true, is_classification=True, is_one_hot_encoded=False, show_results=True, save_results=True, title="", dataset_name=""):
+    def evaluate(self, X_test, y_true, is_classification=True, is_one_hot_encoded=False, show_results=True,
+                 save_results=True, title="", dataset_name=""):
         timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         path = self.__tests_root_dir + timestamp + '/'
         os.mkdir(path)
@@ -46,8 +47,10 @@ class TestEnvironment:
             print()
 
         if is_classification:
-            plot_confusion_matrix(y_true, y_pred, title=title, show_fig=show_results, save_fig=save_results, filename=path + "cm.png")
-            plot_confusion_matrix(y_true, y_pred, normalize=True, title=title, show_fig=show_results, save_fig=save_results, filename=path + "cm_normalized.png")
+            plot_confusion_matrix(y_true, y_pred, title=title, show_fig=show_results, save_fig=save_results,
+                                  filename=path + "cm.png")
+            plot_confusion_matrix(y_true, y_pred, normalize=True, title=title, show_fig=show_results,
+                                  save_fig=save_results, filename=path + "cm_normalized.png")
 
         if save_results:
             # save model architecture
@@ -58,6 +61,7 @@ class TestEnvironment:
             except AttributeError:
                 pass  # no such repr - ignore
 
+            # use the header if target file does not exist -> only at first write
             use_header = not os.path.exists(self.__tests_root_dir + "results.csv")
 
             # save metrics

@@ -5,11 +5,14 @@ from multiprocessing import Pool
 import os
 from itertools import takewhile,repeat
 
-from market_features import *
+from functions.market.features import *
 
 # https://stanford.edu/~shervine/blog/keras-how-to-generate-data-on-the-fly
 class DataGenerator(keras.utils.Sequence):
-    
+    """Data generator for too big data which does not fit in memory
+
+        NOT FUNCTIONAL JUST A SCRATCH!!!!!!!!!!!!
+    """
     def __init__(self, data_root_dir, 
                  batch_size=64, 
                  depth=100,
@@ -30,7 +33,7 @@ class DataGenerator(keras.utils.Sequence):
         self.depth = depth
         
         self.n_labels = n_labels
-        self.label_alpha = alpha
+        self.label_alpha = label_alpha
         self.label_window = label_window
         
         self.time_window = time_window
@@ -50,8 +53,9 @@ class DataGenerator(keras.utils.Sequence):
         """Number of batches per epoch"""
         return int(np.ceil(self.total_frame_count / self.batch_size))
     
-    def __getitem__(self):
+    def __getitem__(self, idx):
         # TODO implement
+        return
     
     def __read_files_lists(self):
         n_asset_pairs = 0
@@ -77,7 +81,7 @@ class DataGenerator(keras.utils.Sequence):
         return n_asset_pairs, update_files_list, snapshot_files_list
     
     def count_samples(self, file_path):
-        f = open(filename, 'rb')
+        f = open(file_path, 'rb')
         bufgen = takewhile(lambda x: x, (f.raw.read(1024*1024) for _ in repeat(None)))
         return sum( buf.count(b'\n') for buf in bufgen )
         
