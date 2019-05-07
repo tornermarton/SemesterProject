@@ -68,17 +68,17 @@
   \tasktitle{Financial time series modeling and forecasting with deep neural networks} 
 
   %\taskdescription
-  \taskdescription{The task is to collect limit order book data from a chosen crypto exchange, 
-  analyze and process the gathered records and to develop a neural network based solution to predict 
-  the direction of the price movement of the asset-pairs.
+  \taskdescription{The task is to collect Limit Order Book data from a chosen cryptocurrency, to analyze and process the 
+  gathered records and to develop a neural network based solution to predict the direction of the price movement of the 
+  asset-pairs.
   
-  In this work level 100 data (limit order book, depth: 100) is used from Kraken crypto exchange. The live order flow 
-  is queried with the help of the provided API and saved on a local storage. The aim is to create a Deep Learning 
-  powered system which can predict the price movement direction from the given history. The first approaches are 
-  models based on autoregressive solutions (logistic regression and random forest regression) and then I try to use a 
-  deep neural network as the model.
+  In this work, level 100 data (Limit Order Book, depth: 100) is used from Kraken crypto exchange. The live order flow 
+  is queried with the help of the provided API and saved on local storage. The aim is to create a Deep Learning 
+  powered system which can predict the price movement direction from the given history with better results than the 
+  baseline solutions. The first approaches are models based on autoregressive solutions (logistic regression and random 
+  forest regression) and then I try to use a deep neural network as the model.
   
-  In the future this work can be used as a base for creating a complex system for algorithmic trading.}
+  In the future, this work can be used as a base for creating a complex algorithmic trading system.}
 
   % semester Arguments: #1=Semester (format: xxxx/xx , #2=I/II (without dot!))
   \begin{center}
@@ -97,8 +97,8 @@
 \label{sec:introduction}
 
 The computerization of financial markets and the availability of the electronic records of different stock exchanges 
-like transactions, order flow and limit order books provide us a great opportunity to analyze and model the dynamics of 
-these markets. Over the last years a huge number of studies have been done on this field which can serve as a good base 
+like transactions, order flow and Limit Order Books provide us a great opportunity to analyze and model the dynamics of 
+these markets. Over the last years, a huge number of studies have been done on this field which can serve as a good base 
 for further studies.
 
 With the computerization also came the rapid acceleration of the trading on these financial markets and big companies 
@@ -146,10 +146,10 @@ These solutions could change the role of financial specialists in the future.
   \subsubsection{Limit Order Book}
   \label{sec:limit_order_book}
   
-  In this work limit order book data is used as the input so this section tries to provide a short overview what it is 
-  and how it works. On stock exchanges we want to buy shares or sell the ones we hold and to accomplish this we place 
-  orders of which the LOB consists. There are more special types of orders but in this work only limit orders are used. 
-  They remain in the LOB until being executed or cancelled.
+  In this work, Limit Order Book (LOB) data is used as the input so this section provides a short overview what it is 
+  and how it works. It is a record of unexecuted limit orders which can be divided to two main categories: orders to buy 
+  shares or to sell the holded ones. They remain in the LOB until being executed or cancelled. It is guaranteed that the 
+  top priority order is executed before other orders in the book.
   
   The LOB has two sides, the ask and the bid side, shown on \autoref{fig:1}. The ask side represents the sell orders 
   (willing to sell the given amount at the given price) and the bid side the buy orders (willing to buy the given amount 
@@ -158,7 +158,7 @@ These solutions could change the role of financial specialists in the future.
   \begin{figure}[tbh]
     \centering
     \includegraphics[width=\textwidth]{lob_snapshot.png}
-    \caption{Limit Order Book snapshot (ETH\_EUR). Bottom: Volume at each price level. Top: Cumulative volume at price levels.}
+    \caption{Limit Order Book snapshot (ETH-EUR). Bottom: Volume at each price level. Top: Cumulative volume at price levels.}
     \label{fig:1}
   \end{figure}
 
@@ -198,21 +198,24 @@ These solutions could change the role of financial specialists in the future.
   Orders are submitted and cancelled continuously which means that the updates arrive in a very high frequency 
   (millisecond) and it is also easy to see that consuming the order flow of stock exchanges leads to Terabytes of data. 
   At crypto exchanges order manipulation is a big problem to be faced at filtering the collected data. So, to process a 
-  live order book we have to deal with various problems [TODO link ide a crawler szekcióhoz].
+  live order book we have to deal with various problems.
 
   \subsubsection{Deep Learning}
   \label{sec:deep_learning}
 
   Deep Learning models are deep neural networks (an example can be seen on \autoref{fig:2}) trained on large datasets to 
   uncover complex non-linear relations between the (high-dimensional) inputs and outputs. This can be simplified as it 
-  represents a functional relation like y = f(x) where y is the output and x is a (high-dimensional) input vector.
+  represents a functional relation like y = f(x) where y is the output and x is a typically high-dimensional input 
+  vector.
 
   \begin{figure}[tbh]
     \centering
     \includegraphics[width=8cm]{mlp.png}
-    \caption{Simple multilayer perceptron.}
+    \caption[Simple multilayer perceptron.]{Simple multilayer perceptron.\footnotemark} 
     \label{fig:2}
   \end{figure}
+
+  \footnotetext{https://medium.com/coinmonks/the-artificial-neural-networks-handbook-part-1-f9ceb0e376b4 (Source: VIASAT)}
 
   The network iterates the input data through its hidden layer(s) (basically weighted sums are calculated followed by 
   so called ‘activation’ functions). In supervised approaches the weights are modified in the backpropagation process 
@@ -222,29 +225,35 @@ These solutions could change the role of financial specialists in the future.
   field a standstill until the rapid spread and improvement of GPUs started providing a huge advancement in 
   calculations.
 
-  \subsubsection{Convolutional Networks}
+  \subsubsection{Convolutional Neural Networks}
   \label{sec:conv_nets}
 
-  A class of deep neural networks are convolutional neural networks (CNN). The main design is the same as any other 
-  networks (input, hidden layers, output). General CNNs use a set of convolutional layers followed by fully-connected 
-  layers (all neurons in a layer are connected to every neuron in the preceding and following layers as seen on 
-  \autoref{fig:2}) as hidden layers. Convolutional layers are used for representing small or high features in the data 
-  with applying a convolutional operation to their input. It uses filters which are parts of the data with the same or 
-  less dimension than the input. Using $k$ filters $k$ feature maps are generated.
+  A class of deep neural networks are Convolutional Neural Networks (CNN). The general architecture is the same as any 
+  other networks (input, hidden layers, output). General CNNs use a set of convolutional layers followed by 
+  fully-connected layers (all neurons in a layer are connected to every neuron in the preceding and following layers as 
+  seen on \autoref{fig:2}) as hidden layers. Convolutional layers are used for representing small or high features in 
+  the data with applying a convolutional operation to their input. ~\cite{cnn} It uses filters which are parts of the 
+  data with the same or less dimension than the input. Using $k$ filters $k$ feature maps are generated. 
+
+  Convolutional Neural Networks were introduced as they show a huge advancement at image recognition (2D convolution)
+  and they can be also powerful at time series prediction (1D convolution). \cite{eval_conv_lstm} They have better 
+  results than simple fully-connected architectures but they need more data and computation power to train.
   
   Attention is a mechanism which can be added to reach better results with the cost of more computational expenses 
   ~\cite{attention}. At a high-level attention can be described as giving the network the ability to learn which parts 
-  are more important to focus on. It is commonly and successfully used at natural language processing tasks.
+  are more important to focus on. Attention mechanism can also be used at other types of neural networks (e.g. LSTM). 
+  It is commonly and successfully used at Natural Language Processing tasks.
 
   \subsubsection{Long Short-Term Memory}
   \label{sec:lstm}
 
-  LSTM networks \cite{lstm, lstm_colah} are a type of Recurrent Neural Netwoks (RNNs). The concept is to model the 
-  aspect of human thinking that our understanding is not simply based on single samples of the world, rather we take 
-  our observations on the past in consideration and based on that our reactions can be completely different. This is 
-  achieved with three gates (with trainable parameters): the input-, the output- and the forget gate. The cell states 
-  are passed through time and resetted when it is appropriate (exact number of timesteps or rule based, e.g. sentence 
-  end). This report does not aim to fully explain the whole architecture, I just wanted to give a small insight.
+  Long Short-Term Memory (LSTM) networks \cite{lstm, lstm_colah} are a type of Recurrent Neural Netwoks (RNNs). The 
+  concept is to model the aspect of human thinking that our understanding is not simply based on single samples of the 
+  world, rather we take our observations on the past in consideration and based on that our reactions can be completely 
+  different. This is achieved with three gates (with trainable parameters): the input-, the output- and the forget gate. 
+  The cell states are passed through time and resetted when it is appropriate (exact number of timesteps or rule based, 
+  e.g. sentence end). This report does not aim to fully explain the whole architecture, I just wanted to give a small 
+  insight.
   
   LSTMs have shown a huge advancement in sequence modeling and became widely used in the following years. However in the 
   recent years several studies stated and have shown that CNNs with attention can outperform these networks in a lot of 
@@ -253,25 +262,26 @@ These solutions could change the role of financial specialists in the future.
   \subsubsection{Generative Adversarial Networks}
   \label{sec:gans}
 
-  Generative adversarial networks (GAN) are deep neural architectures comprised of a generator and a discriminator 
+  Generative Adversarial Networks (GAN) are deep neural architectures comprised of a generator and a discriminator 
   network (\autoref{fig:3}), introduced by Goodfellow et al. ~\cite{gan}. These two networks contest against each other 
   in the following way. The aim of the generator is to produce data indistinguishable of the real data and the 
   discriminator tries to classify whether its input was real data or fake, generated by the opposing network. The losses 
   of the networks are propagated back combined making both networks’ reward depending on both of their performance. This 
   means if the generator lacks competence the discriminator’s work will be easy thus the system will be incompatible of 
-  solving the problem. The design and training of GANs is a complex task.
+  solving the problem. The design and training of GANs is a complex task, hence in this semester I do not try to use one 
+  but they are part of my research which will be conducted later on.
 
   \begin{figure}[tbh]
     \centering
     \includegraphics[width=12cm]{gan.jpg}
-    \caption{GAN architecture example.}
+    \caption{Example of GAN architecture.~\cite{boris}}
     \label{fig:3}
   \end{figure}
 
 \subsection{Starting point, previous works on this project}
 \label{sec:prev_works}
 
-At the start of the project I was no preceding work given and did not make any research on this topic before.
+At the start of the project no preceding work was given and did not make any research on this topic before.
 
 I started learning the theory of Deep Learning as part of the university course VITMAV45 and gained a well based 
 knowledge on the subject to start with.
@@ -289,13 +299,13 @@ knowledge on the subject to start with.
 The project's first task was to find or collect a database to work with. On financial field the big and high frequency 
 raw datasets which are precise enough can cost a lot of money (3000 USD+). There was no funding available so I collected 
 my own raw data from Kraken (\url{www.kraken.com}) which is a US based cryptocurrency exchange. Kraken gives the 
-opportunity to access live order book (and of course other) data through a REST- and a Websocket based API. 
+opportunity to access live order book (and of course other) data through a REST- and a WebSocket based API. 
 
 In the training and evaluation process only ETH-EUR \footnote{Ethereum - Euro: Ethereum is an open-source, public, 
 blockchain-based distributed computing platform and operating system featuring smart contract (scripting) functionality. 
-- \textit{Wikipedia} } snapshots are used but for further research on universality and stationarity ~\cite{univ}. I save 
-25 asset-pair's data in aggregate. For each currency 1 snapshot is querried every minute through REST API calls and the 
-real-time order flow is recorded through the previosly mentioned Websocket API.  
+- \textit{Wikipedia} } snapshots are used but for further research on universality and stationarity ~\cite{univ} I save 
+25 asset-pairs' data in aggregate. For each currency 1 snapshot is querried every minute through REST API calls and the 
+real-time order flow is recorded through the previosly mentioned WebSocket API.  
 
 The saved data is stored in CSV file format, \autoref{table:1} and \autoref{table:2} show the structure. Every 
 asset-pair is saved to a separate folder and at the end of each day all buffer files (updates and snapshots) are 
@@ -366,22 +376,28 @@ multiple CPUs possible. The dataset contains entries from 15th March 2019.
   \subsubsection{Data preparation}
   \label{dataprep}
 
-  I wrote a parameterizable python script to do the whole preprocessing. The following section explains the steps 
+  I wrote a parameterizable Python script to do the whole preprocessing. The following section explains the steps 
   executed by the generator.
 
-  To train my models I chose to use 30 days of ETH-EUR limit order book history. The first step of the preprocessing is 
-  to clean and reorder the update records to put them into an ascending flow. This is required because the Websocket API 
-  not always sends the packets in the right order or a short loss of the network connection can also cause some 
-  problems. At visualizing the data I also noticed that the API sometimes forwards updates with timestamps from few days 
-  ago. Although I could not explain this behaviour I had to remove these entries. The next task was to process the 
-  saved snapshots and create a full dataset which is saved to a single gzipped file. One parameter is which depth to 
-  use and it is important to emphasize that this is the first operation as we calculate every metrics for the following 
-  steps from the snapshots. Then these are followed by labelling and scaling operations which are explained in the next 
+  The first step of the preprocessing is to clean and reorder the update records to put them into an ascending flow. 
+  This is required because the WebSocket API not always sends the packets in the right order or a short loss of the 
+  network connection can also cause some problems. At visualizing the data I also noticed that the API sometimes 
+  forwards updates with timestamps from few days ago. Although I could not explain this behavior I had to remove these 
+  entries. The next task was to process the saved snapshots and create a full dataset which is saved to a single gzipped 
+  file. One parameter is which depth to use and it is important to emphasize that this is the first operation as we 
+  calculate every metrics for the following steps from the snapshots. 
+
+  These are followed by labelling and scaling operations which are explained in the next 
   two sections of this paper. Before feeding the consumed data into the used models the last step is to split it into 
   training, validation and test sets. By definition these sets must not have any intersections but since I use time 
   series data it was important to make one more constraint which is the datapoints in the train set must be prior to the 
-  ones in validation and the same applies for validatin and test. This guaranties that the models learn to generalize 
+  ones in validation and the same applies for validation and test. This guaranties that the models learn to generalize 
   without seeing into the future. 
+
+  For training my models I used 30 days of ETH-EUR Limit Order Book snapshots data which was divided into 80\% training 
+  and 20\% test sets, in case of baseline models and 72\% training, 18\% validation and 10\% test data in case of neural 
+  networks. I collected price aggregated LOB snapshots with the depth of 100 but for my models I used only the best 30 
+  levels in this work to limit the number of parameters at first approaches. 
 
   To use it as an input each snapshot is needed to be converted to a one dimensional array. I use the prices and the 
   cumulative volumes from each level (the timesteps are dropped) in the ascending order of the price values (so 
@@ -392,11 +408,11 @@ multiple CPUs possible. The dataset contains entries from 15th March 2019.
 
   For each snapshot the WAMP (\ref{eq:wamp}) or the VWAP (\ref{eq:vwap}) is calculated since these are used in further 
   steps. After this, we create the labels previously mentioned in \ref{sec:limit_order_book}. The research aims to 
-  successfully predict the direction of the price movement using 3 categories: UP (1), DOWN (-1), NO\_MOVE (0). 
+  successfully predict the direction of the price movement using 3 categories: UP (1), DOWN (-1), SIDEWAY\_MOVE (0). 
   Snapshots are labelled using the following technique, based on the method introduced in the work by Zihao Zhang et al. 
   (~\cite{deeplob}). Although trades aren't executed exactly at the WAMP or the VWAP, they are a good estimation since 
   they contain more information than the mid-price with also taking the volumes at the price levels in consideration. 
-  As financial time series, especially high frequency limit order book metrics are highly stochastic, the comparison 
+  As financial time series, especially high frequency Limit Order Book metrics are highly stochastic, the comparison 
   between $WAMP_t$ and $WAMP_{t+1}$ would result noisy labels which are unable to compress bigger trends (here where the
   updates can happen on the scale of miliseconds this doesn't mean whole days, only minutes). I used a smoothing method 
   which I recall briefly in \autoref{eq:m_minus} and \autoref{eq:m_plus}. The first is the mean of the previous k –
@@ -443,8 +459,8 @@ multiple CPUs possible. The dataset contains entries from 15th March 2019.
   because they were too rare to effect the standard deviation which stayed a small number this way and enlarged the huge 
   numbers (as they were divided by them).
 
-  For the recurrent neural networks a last task was to resample the dataset with the number of parameters as timestep to 
-  create small series as inputs.
+  For neural networks it was an additional task to resample the dataset into small series (e.g. 50 consecutive 
+  timesteps).
 
 \subsection{Models}
 \label{models}
@@ -452,33 +468,33 @@ multiple CPUs possible. The dataset contains entries from 15th March 2019.
 In my work I used three methods as a starting-point (baseline) to see how a simple algorythm can solve this complex task 
 and to have some results to which I can compare my future models. 
 
-The first model is a very simple one, it uses a 
-similar label calculation method as the labelling script except it only can use the past and present values to make it's 
-prediction. It has two hyperparameters: alpha and k, alpha is used in the same way, k is the horizon. The 'mean baseline' 
-calculates the mean of the VWAPS of the previous k snapshots and compares it to the VWAP of the snapshot in the present. 
+The first model is a very simple one, it uses a similar label calculation method as the labelling script except it only 
+can use the past and present values to make it's prediction. It has two hyperparameters: alpha and k, alpha is used in 
+the same way, k is the horizon. The 'mean baseline' (Model 1) calculates the mean of the VWAPS of the previous k 
+snapshots and compares it to the VWAP of the snapshot in the present. 
 
-The following two are logistic regression and random forest classification. I used the scikit-learn python library for 
-both of them. Logistic regression is an approach to modelling the relationship between a dependent and one or more 
-independent variables based on prior observations. It uses a logistic function to predict the target categorical 
-dependent variable which is from the previously mentioned three categories (-1, 0, 1) in this cases.
+The following two are logistic regression (Model 2) and random forest classification (Model 3). I used the scikit-learn 
+python library for both of them. Logistic regression is an approach to modelling the relationship between a dependent 
+and one or more independent variables based on prior observations. It uses a logistic function to predict the target 
+categorical dependent variable which is from the previously mentioned three categories (-1, 0, 1) in this cases.
 
 Random forests is a supervised learning algorithm. It can be used both for classification and regression. A forest is 
 comprised of trees. It creates decision trees on randomly selected data samples, gets prediction from each tree and 
 selects the best solution by means of voting \cite{randomforest}.
 
-The last approach (the first using neural networks) was a simple LSTM model. It's consists of a 1D Convolutional layer 
-(with 32 filters, kernel size and strides both chosen to equal 2) to capture information at each order book level. The 
-next is an LSTM layer with 64 cells and 0.4 dropout. This is followed by the fully connected structure which is a Dense 
-layer with 100 cells ReLU as activation function and 0.2 dropout connected to another Dense layer with 3 cells that 
-does the classification by applying softmax to the output.
+The last approach (the first using neural networks) was a simple LSTM model (Model 4). It's consists of a 1D 
+Convolutional layer (with 32 filters, kernel size and strides both chosen to equal 2) to capture information at each 
+order book level. The next is an LSTM layer with 64 cells and 0.4 dropout. This is followed by the fully connected 
+structure which is a Dense layer with 100 cells ReLU as activation function and 0.2 dropout connected to another Dense 
+layer with 3 cells that does the classification by applying softmax to the output.
 
 \subsection{Results}
 \label{sec:results}
 
 Before showing the results it must be mentioned that predicting stock prices is an exceptionally hard task because of 
-the highly stochastic behaviour of the maket, hence no good solution was publicated. The values follow some basic trends 
-and some basic assumptions can be made based on limit order book snapshots but even a small imbalance or a simple news 
-headline can make a great and unpredictable impact on exchanges since the complexity of human- and crowd behaviour. At 
+the highly stochastic behavior of the maket, hence no good solution was publicated. The values follow some basic trends 
+and some basic assumptions can be made based on Limit Order Book snapshots but even a small imbalance or a simple news 
+headline can make a great and unpredictable impact on exchanges since the complexity of human- and crowd behavior. At 
 high frequency financial data even a one percent deviation from the 'random guess' or baseline results can mean a huge 
 change in profit. 
 
@@ -489,20 +505,15 @@ percent values together.
   \centering
   \begin{tabularx}{\columnwidth}{XX}
   \includegraphics[width=\linewidth]{mb_results.png}
-  \captionof{figure}{Mean baseline}\label{fig:5}
+  \captionof{figure}{Mean baseline (Model 1)}\label{fig:5}
       &   \includegraphics[width=\linewidth]{lr_results.png}   
-          \captionof{figure}{Logistic regression}\label{fig:6}              \\
+          \captionof{figure}{Logistic regression (Model 2)}\label{fig:6}              \\
   \includegraphics[width=0.45\columnwidth]{rf_results.png}
-  \captionof{figure}{Random forest classification}\label{fig:7}
+  \captionof{figure}{Random forest classification (Model 3)}\label{fig:7}
       &   \includegraphics[width=\linewidth]{lstm_results.png} 
-          \captionof{figure}{LSTM model}\label{fig:8}               
+          \captionof{figure}{LSTM model (Model 4)}\label{fig:8}               
   \end{tabularx}
 \end{table}%
-
-For the predictions I used 30 days of ETH-EUR limit order book snapshots data which was divided into 80\% training and 
-20\% test sets, in case of baseline models and 72\% training, 18\% validation and 10\% test data in case of neural 
-networks. I collected price aggregated LOB snapshots with the depth of 100 but for my models I used only the best 30 
-levels in this work to limit the number of parameters at first approaches. 
 
 It is clear that the mean baseline (\autoref{fig:5}) gives surprisingly accurate predictions, however as I see it this 
 is only because it uses a similar method as the labeling. Logistic regression (\autoref{fig:6}) and random forest 
@@ -538,36 +549,38 @@ barriers to overcome (which is not impossible in my opinion) but is promising to
 \label{sec:references}
 
 \begin{references}{9}
+  \bibitem{univ} J. Sirignano and R. Cont, "Universal features of price formation in financial markets: perspectives from Deep Learning",  
+  \textit{arXiv preprint arXiv: 1803.06917}, 2018.
 
-  \bibitem{univ} Justin Sirignano and Rama Cont (2018). 
-  \emph{\href{https://arxiv.org/abs/1803.06917.pdf}{Universal features of price formation in financial markets: perspectives from Deep Learning}}
+  \bibitem{cnn} Y. LeCun, B. E. Boser, J. S. Denker, D. Henderson, R. E. Howard, W. E. Hubbard and L. D. Jackel, "Handwritten Digit Recognition with a Back-Propagation Network", 
+  \textit{Neural Information Processing Systems}, vol. 2, pp. 396-404, 1989. 
 
-  \bibitem{attention} 
-  \emph{\href{https://medium.com/syncedreview/a-brief-overview-of-attention-mechanism-13c578ba9129}{A Brief Overview of Attention Mechanism}}
+  \bibitem{attention} Synced (Medium), "A Brief Overview of Attention Mechanism", 
+  \textit{URL: https://medium.com/syncedreview/a-brief-overview-of-attention-mechanism-13c578ba9129}, 2017.
 
-  \bibitem{gan} Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, Yoshua Bengio (2014). 
-  \emph{\href{http://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf}{Generative Adversarial Nets}}
+  \bibitem{lstm} S. Hochreiter, J. Schmidhuber, "Long Short-Term Memory", 
+  \textit{Neural computation}, vol. 9, no. 8, pp. 1735-80, 1997.
 
-  \bibitem{lstm} Sepp Hochreiter, Jürgen Schmidhuber (1997). 
-  \emph{\href{https://www.bioinf.jku.at/publications/older/2604.pdf}{Long Short-Term Memory}}
+  \bibitem{lstm_colah} C. Olah, "Understanding LSTM Networks", 
+  \textit{URL: https://colah.github.io/posts/2015-08-Understanding-LSTMs/}, 2015.
 
-  \bibitem{lstm_colah} Christopher Olah (2015). 
-  \emph{\href{https://colah.github.io/posts/2015-08-Understanding-LSTMs/}{Understanding LSTM Networks}}
-
-  \bibitem{eval_conv_lstm} Shaojie Bai, J. Zico Kolter, Vladlen Koltun (2018). 
-  \emph{\href{https://arxiv.org/pdf/1803.01271.pdf}{An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling}}
+  \bibitem{eval_conv_lstm} S. Bai, J. Z. Kolter, V. Koltun, "An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling",  
+  \textit{arXiv preprint arXiv: 1803.01271}, 2018.
   
-  \bibitem{fall_rnn} Eugenio Culurciello (2018). 
-  \emph{\href{https://towardsdatascience.com/the-fall-of-rnn-lstm-2d1594c74ce0}{The fall of RNN / LSTM}}
+  \bibitem{fall_rnn} E. Culurciello, "The fall of RNN / LSTM", 
+  \textit{URL: https://towardsdatascience.com/the-fall-of-rnn-lstm-2d1594c74ce0}, 2018.
 
-  \bibitem{boris} 
-  \emph{\href{https://github.com/borisbanushev/stockpredictionai}{Using the latest advancements in AI to predict stock market movements}}
+  \bibitem{gan} I. J. Goodfellow, J. Pouget-Abadie, M. Mirza, B. Xu, D. Warde-Farley, S. Ozair, A. Courville, Y. Bengio, "Generative Adversarial Nets",  
+  \textit{Advances in Neural Information Processing Systems 27}, pp. 2672-2680, 2014.
 
-  \bibitem{deeplob} Zihao Zhang, Stefan Zohren, and Stephen Roberts (2019). 
-  \emph{\href{https://arxiv.org/abs/1803.06917.pdf}{DeepLOB: Deep Convolutional Neural Networks for Limit Order Books}}
+  \bibitem{boris} Boris, "Using the latest advancements in AI to predict stock market movements", 
+  \textit{URL: https://github.com/borisbanushev/stockpredictionai/\\commit/63c59f0c013a1d426d3da1ebaa0d4d80e96a75a3}, 2018.
 
-  \bibitem{randomforest} Avinash Navlani (2018). 
-  \emph{\href{https://www.datacamp.com/community/tutorials/random-forests-classifier-python}{Understanding Random Forests Classifiers in Python}}
+  \bibitem{deeplob} Z. Zhang, S. Zohren, and S. Roberts, "DeepLOB: Deep Convolutional Neural Networks for Limit Order Books",  
+  \textit{arXiv preprint arXiv: 1808.03668v4}, 2019.
+
+  \bibitem{randomforest} A. Navlani, "Understanding Random Forests Classifiers in Python", 
+  \textit{URL: https://www.datacamp.com/community/tutorials/random-forests-classifier-python}, 2018. 
 
 \end{references}
 

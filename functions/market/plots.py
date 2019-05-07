@@ -50,6 +50,8 @@ def plot_LOB(lob_snapshot, depth):
     # bids
     ax2.plot(x_bid, y_bid, color='g', label="Bids")
 
+    plt.subplots_adjust(hspace=0.5)
+
     ax2.set_ylabel('Volume')
     ax2.set_xlabel('Price')
     ax2.grid()
@@ -101,6 +103,6 @@ def plot_labels(values, labels):
     ax.legend([patches.Rectangle((0, 0), 1, 1, facecolor='green'),
                patches.Rectangle((0, 0), 1, 1, facecolor='white'),
                patches.Rectangle((0, 0), 1, 1, facecolor='red')],
-              ('UP', 'NO_MOVE', 'DOWN'))
+              ('UP', 'SIDEWAY_MOVE', 'DOWN'))
 
     plt.show()
