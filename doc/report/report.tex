@@ -1,100 +1,53 @@
 %                                             -*- coding: utf-8 -*-
-% Mindenkinek csak javasolni tudjuk, hogy latex-et használjon.
-% Szakdolgozatnál vagy diplománál már egyértelműen kijönnek az
-% előnyei a Worddel szemben.  Ennek ellenére ez a sablon messze nem
-% tökéletes.  Ha valamit javítanál benne, kérlek, küld vissza, hogy
-% hallgatótársaid is profitáljanak belőle.  Köszönöm.
+% Using LaTeX is highly recommended. 
+% If you correct/upgrade anything please send it back to help others' work.
 
-% További nehézséget okoz, hogy a népszerű latex disztribúciók nem
-% tartalmazzák a legújabb változatát a magyar.ldf-nek.  A szükséges
-% fájlokat a sablon mellé bemásoltuk, de le is tölthetőek innen:
-% http://www.math.bme.hu/latex/
-%
-%
-%
 \documentclass[11pt,a4paper,oneside]{article}
 \usepackage[margin=3cm]{geometry}
 % =================================================================
-% Magyar nyelvi támogatás
-%------------------------
-% ###################
-% Nyelvváltó parancsok:
-%\selectlanguage{english}
-%\selectlanguage{magyar}
-% rövid angol beszúrás:  \foreignlanguage{english}{some english text}
-% határozott névelők generálása ``magyar'' babel-el:
-% argumentum+megfelelő határozott nevelő: \az{},\Az{}
-% csak a megfelelő határozott nevelő: \az*{}, \Az*{}
-% címkék: \aref{}, \aref*{}, képletekhez \aref()
-%        \Aref{}, \Aref*{}, képletekhez \Aref()
-% oldalak: \apageref{}, \apageref*{}
-%        \Apageref{}, \Apageref*{}
-% idézetek: \acite, \acite*, \Acite, \Acite*
-% ###################
-\usepackage[english]{babel} %vegyes nyelvi támogatás a
-% magyar helyesírás ellenőrzéshez (ispell) és elválasztáshoz
+\usepackage[english]{babel}
 \selectlanguage{english}
 
 %=================================================================
-% direkt ékezetes karakter beírás támogatás
-%-------------------------------------------
+% Font encoding
+% The T1 font encoding is an 8-bit encoding and uses fonts that have 256 glyphs.
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{multirow} 
 %================================================================
-% Undorító dolog bitmappelt (Type III) betűtípust nézni a PDF-ben
-% képernyőn. Az alapértelmezett Computer Modern font LaTex-ben
-% bitmappelt, ezért használjunk Times fontot:
+% Use Times New Roman
 \usepackage{times}
 
 %================================================================
-% ha ábrát akarunk beemelni, akkor használjuk a graphicx/graphics
-% csomagot és az \includegraphics[width=<width>]{abra.pdf} parancsot
+% Figures
+% usage: \includegraphics[width=<width>]{fig.png}
 \usepackage{graphicx} %for graphics
-%kepek helye a gyokerhez(ehhez a file-hoz kepest) kepest
+
+% images root folder
 \graphicspath{{./figs/}}
 
 \usepackage{tabularx}
 \usepackage[skip=1ex]{caption}
 
 %================================================================
-% Kötelezően használjuk a hyperref csomagot, mert ezzel többek között 
-%  kultúrált hyperlinkelt PDF-et lehet csinálni az alábbi
-%  variációkban, különféle hyperref backend-ekkel:
-%  pdflatex,dvipdfm,ps2pdf
-% tapsztalataim szerint a MikTeX (Win32) a 'dvipdfm' konverzióval
-% optimális  míg a teTeX (Linux/Solaris) jobb szereti a 'dvips' módszert
+% Package to create pdf hyperlinks
 %------------------------------------
-% pontosan egyet kommentezzünk be!!!!!!!
-% értelemszerűen backend függően generáljunk dvi-ból PDF-et!!!
-%------------------------------------
-% A hyperref csomag az utolsó beolvasott csomag legyen, kivéve néhány
-% problémás csomagot, pl. algorithm
-%-----------
-% ########################### FONTOS ###########################
-% A hyperref hibásan működik a babel csomag 'magyar.ldf' fájljának
-% 1.5-ös verziójánál korábbi változatával. 2004. februárjában a MikTeX
-% és teTex disztribúciók még csak a v.1.4 verziót tartalmazták! A fájl
-% aktuális verziója a BME Matematikai intézet LaTeX honlapjáról
-% elérhető: http://www.math.bme.hu/latex/ 
-% A lusták kedvéért a jelen sablon mellé is mellékelem:
-% magyarlatex_0.01-2.tar.gz 
-% ########################### FONTOS ###########################
-%-----------
+% Hyperref should be the last imported (except some problematic packages, e.g. algorithm)
 \PassOptionsToPackage{hyphens}{url}\usepackage[colorlinks=true]{hyperref}
 \def\equationautorefname~#1\null{Equation (#1)\null}
 \def\figureautorefname~#1\null{Figure (#1)\null}
 \def\tableautorefname~#1\null{Table (#1)\null}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Itt kezdődik maga a dokumentum
+% HERE IS THE START OF THE DOCUMENT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
-\input{macros} % Ez kell!!!
-\markright{Márton Torner (OZFKFP)} % egyoldalas fejléc!!!
+\input{macros} % Import macros
+\markright{Márton Torner (OZFKFP)} % one sided title page!!!
 
 %--------------------------------------------------------------------
-% fedlap
+% title page
 %--------------------------------------------------------------------
 \begin{titlepage}
 %bme logo 
@@ -104,17 +57,17 @@
   \label{fig:bme_logo}
   \end{figure}
   \thispagestyle{empty}
-  %cím generálás
+  
+  % generate title
   \semesterprojecttitle
  
-  %\author argumentumok: #1=Név, #2=Neptunkód, #3=szakirány, #4=email,#5 konzulens-1, #6 konzulens-1-email, #7 konzulens-2, #8 konzulens-2-email
   \semesterprojectauthor{Márton Torner}{OZFKFP}{Infocommunication (HIT)}{torner.marton@gmail.com}{Bálint Gyires-Tóth, PhD}{toth.b@tmit.bme.hu}
  
  
-%\tasktitle argumentuma a task rövid, 1 soros címe
+  %\tasktitle
   \tasktitle{Financial time series modeling and forecasting with deep neural networks} 
 
-  %\taskdescription argumentuma a task 1-2 bekezdésnyi ismertetése
+  %\taskdescription
   \taskdescription{The task is to collect limit order book data from a chosen crypto exchange, 
   analyze and process the gathered records and to develop a neural network based solution to predict 
   the direction of the price movement of the asset-pairs.
@@ -127,8 +80,7 @@
   
   In the future this work can be used as a base for creating a complex system for algorithmic trading.}
 
-  %\semester argumentumok:
-  % #1=Tanév (xxxx/xx alakban), #2=félév (pont nélkül!)
+  % semester Arguments: #1=Semester (format: xxxx/xx , #2=I/II (without dot!))
   \begin{center}
     \semester{2018/19}{II}
   \end{center}
@@ -140,8 +92,7 @@
   \section{Theory and previous works}
   \label{sec:theory_prev}
 \end{center}
-% A munka  előzményei és kiindulási állapota
-% \newpage
+
 \subsection{Introduction}
 \label{sec:introduction}
 

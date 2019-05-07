@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Ezt ne piszkáld!!!!
+% Do not modify if you don't know what you are doing!!!!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\pagestyle{myheadings} % legyen fejléc 
+\pagestyle{myheadings} % use heading 
 
 \newcommand{\semesterprojecttitle}{
   \begin{center}
@@ -13,7 +13,7 @@
   \bigskip
 } 
 
-% Argumentumok: #1=Név, #2=Neptunkód, #3=szakirány, #4=email, #5 konzulens-1, #6 konzulens-1-email, #7 konzulens-2, #8 konzulens-2-email
+% #1=Name, #2=Neptun, #3=Specialization, #4=Email, #5 Supervisor-1, #6 Supervisor-1-Email, #7 Supervisor-2, #8 Supervisor-2-Email
 \newcommand{\semesterprojectauthor}[6]{
 
 \begin{center}
@@ -31,20 +31,12 @@
 
 }
 
-% % Argumentumok: #1=Név, #2=email
-% \newcommand{\konzulens}[2]{
-%   \noindent\textbf{Konzulens:} #1 
-%   \newline\emph{Email cím:}\/ \href{mailto:#2}{#2}
-%   \newline
-% 
-% }
-
-% Argumentumok: #1=Tanév (xxxx/xx alakban, #2=félév (pont nélkül)
+% Arguments: #1=Semester (format: xxxx/xx , #2=I/II (without dot!))
 \newcommand{\semester}[2]{
   \large\textbf{#1 #2. semester}
 }
 
-% Argumentumok: #1=téma címe 
+% Arguments: #1=Title
 \newcommand{\tasktitle}[1]{
   \begin{center}
     \LARGE\textbf{Title: #1}
@@ -52,7 +44,7 @@
   \end{center}
 }
 
-% Argumentumok: #1=téma részletei 
+% Arguments: #1=Description
 \newcommand{\taskdescription}[1]{
 \begin{center}
   \Large\textbf{Task} 
@@ -62,7 +54,7 @@
 \bigskip
 }
 
-% A fejezetek közé beágyazott irod.jegyzék
+% References
 \def\references#1{\renewcommand{%
 \baselinestretch}{1}\list
  {\small [\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
