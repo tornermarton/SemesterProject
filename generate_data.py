@@ -4,6 +4,7 @@ import numpy as np
 import argparse
 import gzip
 import os
+from threading import Thread
 
 from sklearn.preprocessing import StandardScaler
 
@@ -124,38 +125,27 @@ def process_asset_pair(file_paths: list,
     dataset = dataset[label_window - 1:-label_window]
 
     if verbosity >= 2:
-        print("Start scaling", asset_pair, ".")
+        print("Start scaling", asset_pair, "asset-pair.")
 
     # do scaling
-    # for i in range(len(dataset["snapshot"]) - scaling_window):
-    #     price_scaler = StandardScaler().fit(dataset["snapshot"][i:i + scaling_window + 1, :, 0])
-    #     volume_scaler = StandardScaler().fit(dataset["snapshot"][i:i + scaling_window + 1, :, 1])
-    #
-    #     dataset["snapshot"][i + scaling_window, :, 0] = \
-    #     price_scaler.transform([dataset["snapshot"][i + scaling_window, :, 0]])[0]
-    #
-    #     dataset["snapshot"][i + scaling_window, :, 1] = \
-    #     volume_scaler.transform([dataset["snapshot"][i + scaling_window, :, 1]])[0]
-    #
-
-    day = 50
+    day = 1440
 
     r = range(0, len(dataset["snapshot"]) - scaling_window - day, day)
 
+    # scalers need to be fit in advance as during the process the preceding data is already scaled
     scalers = [StandardScaler().fit(dataset["snapshot"][i:i + scaling_window].reshape(-1, 3)) for i in r]
 
     for cnt, i in enumerate(r):
-        dataset["snapshot"][i + scaling_window:i + scaling_window + day] = \
-            scalers[cnt].transform(
-                dataset["snapshot"][i + scaling_window:i + scaling_window + day].reshape(-1, 3)).reshape(-1,
-                                                                                                         2 * lob_depth,
-                                                                                                         3)
+        start = i + scaling_window
+        end = start + day
+
+        dataset["snapshot"][start:end] = \
+            scalers[cnt].transform(dataset["snapshot"][start:end].reshape(-1, 3)).reshape(-1, 2 * lob_depth, 3)
 
     if verbosity >= 2:
         print("Scaling done.")
 
     # Trim unscaled data
-    # dataset = dataset[scaling_window:]
     dataset = dataset[scaling_window:(len(dataset) // day) * day]
 
     # gzip and save file
@@ -195,15 +185,26 @@ def run(data_root_dir: str,
         print(n_days, "days of data is going to be consumed from", n_asset_pairs, "asset-pairs.")
         print("UP,", "" if binary_labels else "NO_MOVE,", "DOWN labels are used at labelling.")
 
+    threads = []
+
     for i in range(n_asset_pairs):
-        process_asset_pair(file_paths=snapshots_file_list[i * n_days:i * n_days + n_days],
-                           lob_depth=lob_depth,
-                           alpha=alpha,
-                           label_window=label_window,
-                           scaling_window=scaling_window,
-                           binary_labels=binary_labels,
-                           use_wamp=use_wamp,
-                           verbosity=verbosity)
+        t = Thread(target=process_asset_pair, args=(), kwargs={
+            'file_paths': snapshots_file_list[i * n_days:i * n_days + n_days],
+            'lob_depth': lob_depth,
+            'alpha': alpha,
+            'label_window': label_window,
+            'scaling_window': scaling_window,
+            'binary_labels': binary_labels,
+            'use_wamp': use_wamp,
+            'verbosity': verbosity
+        })
+
+        threads.append(t)
+
+        t.start()
+
+    for t in threads:
+        t.join()
 
     if verbosity >= 1:
         print("Finished.")
@@ -245,7 +246,7 @@ if __name__ == "__main__":
     parser.add_argument("-s", "--scaling_window",
                         metavar="WINDOW_SIZE",
                         help="Size of the sliding window at standard scaling.",
-                        default=300,
+                        default=3 * 1440,
                         type=int
                         )
 
