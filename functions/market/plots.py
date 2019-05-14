@@ -28,7 +28,9 @@ def plot_LOB(lob_snapshot, depth):
         y_cum_ask.append(sum_i)
         y_cum_bid.append(sum_j)
 
-    fig, (ax1, ax2) = plt.subplots(2)
+    # share x axis
+    fig, (ax1, ax2) = plt.subplots(2, sharex=True, figsize = (16, 9))
+    fig.subplots_adjust(hspace=0.05, bottom=0.0)
 
     # asks cumulated
     ax1.plot(x_ask, y_cum_ask, 'r', label="Asks")
@@ -38,9 +40,8 @@ def plot_LOB(lob_snapshot, depth):
     ax1.fill_between(x_ask, y_cum_ask, y2=0, color=(1, 0, 0, 0.3))
     ax1.fill_between(x_bid, y_cum_bid, y2=0, color=(0, 1, 0, 0.3))
 
-    ax1.set_title('LOB snapshot')
+    ax1.set_title('Limit Order Book snapshot')
     ax1.set_ylabel('Cumulative Volume')
-    ax1.set_xlabel('Price')
     ax1.grid()
     ax1.tick_params(grid_alpha=0.5)
     ax1.legend(loc='upper center')
@@ -49,8 +50,6 @@ def plot_LOB(lob_snapshot, depth):
     ax2.plot(x_ask, y_ask, color='r', label="Asks")
     # bids
     ax2.plot(x_bid, y_bid, color='g', label="Bids")
-
-    plt.subplots_adjust(hspace=0.5)
 
     ax2.set_ylabel('Volume')
     ax2.set_xlabel('Price')
@@ -63,16 +62,15 @@ def plot_LOB(lob_snapshot, depth):
 
 def plot_price_movement(dataset):
     data = dataset[:, :600]
-    time_ = dataset[:, 600]
 
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize = (16, 9))
 
     # mid-price
-    ax.plot(time_, [calc_mid_price(i) for i in data], 'r', label='Mid-price')
+    ax.plot([calc_mid_price(i) for i in data], 'r', label='Mid-price')
     # WAMP
-    ax.plot(time_, [calc_WAMP(i) for i in data], 'g', label='WAMP')
+    ax.plot([calc_WAMP(i) for i in data], 'g', label='WAMP')
     # WAMP
-    ax.plot(time_, [calc_VWAP(i) for i in data], 'b', label='VWAP')
+    ax.plot([calc_VWAP(i) for i in data], 'b', label='VWAP')
 
     ax.set_ylabel('Price')
     ax.set_xlabel('Time')
@@ -86,7 +84,7 @@ def plot_price_movement(dataset):
 
 
 def plot_labels(values, labels):
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize = (16, 9))
 
     ax.plot(values)
 
