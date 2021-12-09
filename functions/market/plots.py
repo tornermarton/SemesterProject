@@ -42,8 +42,7 @@ def plot_LOB(lob_snapshot, depth):
 
     ax1.set_title('Limit Order Book snapshot')
     ax1.set_ylabel('Cumulative Volume')
-    ax1.grid()
-    ax1.tick_params(grid_alpha=0.5)
+    ax1.grid(alpha=0.5)
     ax1.legend(loc='upper center')
 
     # asks
@@ -53,8 +52,7 @@ def plot_LOB(lob_snapshot, depth):
 
     ax2.set_ylabel('Volume')
     ax2.set_xlabel('Price')
-    ax2.grid()
-    ax2.tick_params(grid_alpha=0.5)
+    ax2.grid(alpha=0.5)
     ax2.legend(loc='upper center')
 
     plt.show()
@@ -76,8 +74,7 @@ def plot_price_movement(dataset):
     ax.set_xlabel('Time')
     ax.set_title('Daily price movement')
 
-    ax.tick_params(grid_alpha=0.5)
-    ax.grid()
+    ax.grid(alpha=0.5)
     ax.legend(loc='upper center')
 
     plt.show()
